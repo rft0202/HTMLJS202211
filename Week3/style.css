@@ -1,0 +1,21 @@
+html, body{
+    background-color: pink;
+    color: blue;
+    
+}
+h1{
+    margin: auto;
+    border: 10px solid blue;
+    padding: 40px;
+    background-color: cornflowerblue;
+    font-family: Arial;
+    text-align: center;
+    color: blueviolet;
+}
+p{
+    width: 400px;
+    margin-top: 100px;
+    border: 15px dashed blue;
+    padding: 0;
+    font-family: 'Courier New', Courier, monospace;
+}
