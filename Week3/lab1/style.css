@@ -1,0 +1,7 @@
+html, body{
+    background-color: rgb(138, 219, 138);
+}
+p{
+    border: 1px dashed purple;
+    font-family: 'Courier New', Courier, monospace;
+}
