@@ -15,7 +15,7 @@ h1{
 p{
     width: 400px;
     margin-top: 100px;
-    border: 15px dashed blue;
+    border: 2px dashed blue;
     padding: 0;
     font-family: 'Courier New', Courier, monospace;
 }
