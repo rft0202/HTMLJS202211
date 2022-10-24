@@ -1,0 +1,26 @@
+body{
+    background-color: turquoise;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: medium;
+    color: rebeccapurple;
+}
+.container{
+    width: 970px;
+    padding: 10px;
+    text-align: center;
+}
+h1{
+    width: 950px;
+    padding: 10px;
+    text-align: center;
+    background-color: aquamarine;
+    border: 5px solid cadetblue;
+}
+.sections{
+    width: 950px;
+    padding: 10px;
+    background-color: aqua;
+}
+img{
+    border: 5px dashed rebeccapurple
+}
