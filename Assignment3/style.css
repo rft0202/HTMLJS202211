@@ -4,7 +4,7 @@ body{
     font-size: medium;
     color: rebeccapurple;
 }
-.container{
+#container{
     width: 970px;
     padding: 10px;
     text-align: center;
@@ -24,9 +24,6 @@ h1{
 img{
     border: 5px dashed rebeccapurple;
     width: 400px;
-}
-.images{
-    text-align: center;
 }
 a{
     text-decoration: none;
