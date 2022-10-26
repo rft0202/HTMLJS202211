@@ -19,7 +19,8 @@ nav{
 
 article{
     width: 1000px;
-    border: 1px solid black;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
 }
 
 footer{
@@ -51,6 +52,7 @@ footer{
     height: 50px;
     border-left: 1px solid black;
     border-right: 1px solid black;
+    border-top: 1px solid black;
 }
 .btn{
     float: left;
@@ -76,6 +78,6 @@ footer{
 
 .article-image{
     margin-left: 10px;
-    margin-top: 5px;
+    margin-top: 4px;
     border: 2px solid red;
 }
