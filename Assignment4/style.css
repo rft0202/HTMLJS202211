@@ -1,3 +1,6 @@
+html{
+    background-color: rgb(130, 166, 172);
+}
 body{
     display: flex;
     justify-content: center;
@@ -5,6 +8,7 @@ body{
 #container{
     width: 1000px;
     border: 1px solid black;
+    background-color: rgb(93, 129, 133);
 }
 
 header{
@@ -58,7 +62,7 @@ footer{
     float: left;
     width: 135px;
     height: 50px;
-    background-color: gray;
+    background-color: darkcyan;
     text-decoration: none;
     text-align: center;
     line-height: 50px;
@@ -66,7 +70,7 @@ footer{
 }
 
 .btn:hover{
-    background-color: rgb(44, 44, 44);
+    background-color: teal;
     color: white;
 }
 
@@ -79,5 +83,5 @@ footer{
 .article-image{
     margin-left: 10px;
     margin-top: 4px;
-    border: 2px solid red;
+    border: 2px solid teal;
 }
