@@ -102,7 +102,6 @@ header {
 	background-image: url(images/fg_logo.png);
 	background-repeat: no-repeat;
 	background-position: right center;
-	/*?*/
 
 }
 nav {
@@ -199,7 +198,6 @@ aside img {
 	/* Give the images a margin bottom of 10 pixels so they push away from one another */ 
 	width: 100%;
 	float: left;
-	/*any?*/
 	margin-bottom: 10px;
 }
 
