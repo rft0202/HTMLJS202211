@@ -1,0 +1,221 @@
+
+* {
+	box-sizing:border-box;
+	margin: 0;
+	padding: 0;
+	/* Give this "global" element a margin of zero  */
+	/* Give this "global" element a padding of zero */
+}
+
+html body {
+	/* Give these two elements a height of 100% */
+	height: 100%;
+}
+html {
+	/* Give this element a background color of black */
+	/* Give this element a padding of 20 pixels */
+	/*remove this border when done border:10px solid blue;*/
+	background-color: black;
+	padding: 20px;
+}
+
+body {
+	/* Give this element a background color of #0bdefb */
+	/* Set the entire page font family to a font of Arial */ 
+	/* set the font size to 18 pixels */
+	/* set the text color to #022634 */ 
+	/*remove this border when done border:5px solid red;*/
+	background-color: #0bdefb;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 18px;
+	color: #022634;
+}
+
+#container {
+	/* Give the container a width of 980 pixels */
+	/* give this element a margin of auto */
+	padding:10px;
+	/*remove this border when done border:5px solid pink;*/
+	width: 980px;
+	margin: auto;
+}
+footer {
+	/* Clear the footer for both side of content */
+	/* Give this element a width of 100% */
+	/* Give this element a padding top and bottom of 20 pixels and a right and left of zero using the padding shorthand property */
+	/* Give this element a border top of 2 pixels, a solid line and a hex color of #09c1da */ 
+	/* Give the text inside this element a font size of 10 pixels */
+	/*removed border:5px solid green;*/
+	clear: both;
+	width: 100%;
+	padding: 20px 0px 20px 0px;
+	border-top: 2px solid #09c1da;
+	font-size: 10px;
+}
+
+.copy {
+	/* Float the copyright to the left inside the footer */
+	/* Give this element a text color of #066875 */
+	float: left;
+	color: #066875;
+}
+
+.fox {
+	/* Float this element to the right inside the footer */
+	/* Give this element a font weight of bold */
+	float:right;
+	font-weight: bold;
+}
+
+.fox a {
+	/* Make the text color of this link black */
+	color: black;
+}
+
+/* Header Stylings ----------*/
+header {
+	/* Give this element a height of 100 pixels*/
+	/* Float this element left in the container */ 
+	/* Give this element a width of 100% */ 
+	border-bottom:2px solid #09c1da;
+	height: 100px;
+	float: left;
+	width: 100%;
+}
+
+#name {
+	/* Float Peter's name left inside the header */ 
+	float:left;
+	/* Give this element a width of 430 pixels */
+	/* Give this element a height of 100 pixels */
+	/* Center the text vertically using a line height of 100 pixels */
+	/* Give the Peter Griffin text a color of #cd37ff */ 
+	/* Give this element of font size of 50 pixels */
+	/* Insert a background image of "fg_logo.png" as a background */
+	/* Make the background image not repeat */
+	/* make the background image position "right" horizontally and "center" vertically */
+	width: 430px;
+	height: 100px;
+	line-height: 100px;
+	color: #cd37ff;
+	font-size: 50px;
+	background-image: url(images/fg_logo.png);
+	background-repeat: no-repeat;
+	background-position: right center;
+	/*?*/
+
+}
+nav {
+	/* Float the nav to the right inside the header */
+	/* Give the nav a margin top of 20 pixels */
+	/*remove this border when done border:5px solid red;*/
+	float: right;
+	margin-top: 20px;
+}
+
+.btn {
+	display:block;
+	/* Float the button left */
+	/* Give the button a padding of 20 pixels */
+	/* Make the button text color a hex color of #cccccc */
+	/* Make the button text have no underline */ 
+	/* Give the button a background color of black */
+	/* Margin right the button 2 pixels so it pushes away from the next button */
+	float: left;
+	padding: 20px;
+	color: #cccccc;
+	text-decoration: none;
+	background-color: black;
+	margin-right: 2px;
+}
+
+.btn:hover {
+	/* Give the button hover a background color of #056D7B */ 
+	/* Make the button text color be white */
+	background-color: #056D7B;
+	color: white;
+}
+
+/* End Header Stylings ----------------------*/
+
+
+/* Peter Griffin content stylings -------------*/
+section {
+	/* Float this div left inside the container under the header */
+	/* Give this div a width of 600 pixels */
+	/* Give this div a padding of 10 pixels */
+	text-align:justify;
+	/*remove this border when done border:5px solid orange;*/
+	float: left;
+	width: 600px;
+	padding: 10px;
+}
+
+p {
+	/*remove this border when done border:5px solid blue;*/
+}
+
+.title {
+	/* Give the title a margin top,right and left of zero and a margin bottom of 10 pixels */
+	/* Float this element left inside the content div */
+	/* Give this element a width of 100% */
+	margin-top: 0;
+	margin-right: 0;
+	margin-left: 0;
+	margin-bottom: 10px;
+	float: left;
+	width: 100%;
+}
+
+
+section img {
+	/* Float the image of Peter to the right so the text wraps around his image */
+	 /* Give the Peter image a border of 4 pixels, a solid line and the hex color of #009ad8 */
+	margin:0 0 20px 20px;
+	float: right;
+	border: 4px solid #009ad8;
+}
+
+/* Aside stylings ---------------------------*/
+
+aside {
+	/* Float the aside to the right under the header in the container div */
+	/* Give this element a width of 325 pixels */
+	/* Give the aside a margin top of 10 pixels to pull it away from the header */
+	min-height:300px;
+	/* Give this element a padding of 10 pixels */
+	/* Give this element a background color of #00c4e7 */ 
+	/*remove this border when done border:5px solid blue;*/
+	float: right;
+	width: 325px;
+	margin-top: 10px;
+	padding: 10px;
+	background-color: #00c4e7;
+}
+
+aside img {
+	 /* Give this element a width of 100%*/
+	/* Float any image in the aside to the left */
+	/* Give the images a margin bottom of 10 pixels so they push away from one another */ 
+	width: 100%;
+	float: left;
+	/*any?*/
+	margin-bottom: 10px;
+}
+
+h4 {
+	/* Float this heading to the left inside the aside box */
+	/* Give this element a width of 100% */
+	margin:0 0 5px 0;
+	/* Give this element a padding of 6 pixels for top and bottom and zero pixels for right and left using the padding shorthand property */
+	/* Give this element a background color of black */ 
+	/* Align the text in this element center */
+	/* Give the text a color of white*/
+	float: left;
+	width: 100%;
+	padding: 6px 0px 6px 0px;
+	background-color: black;
+	text-align: center;
+	color: white;
+}
+
