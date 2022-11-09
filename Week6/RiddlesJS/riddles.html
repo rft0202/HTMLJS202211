@@ -5,12 +5,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Riddles with JavaScript</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik+Bubbles&display=swap" rel="stylesheet">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Rubik+Bubbles&display=swap');
+
+        @font-face {
+            font-family: party;
+            src: url(fonts/PartyConfetti.ttf);
+        }
         h1{
             font-family: 'Courier New', Courier, monospace;
             color: purple;
             background-color: forestgreen;
             border: 5px solid purple;
+        }
+        button, body{
+            font-family: party;
         }
     </style>
     <link rel="stylesheet" href="../../Week3/lab1/style.css">
@@ -21,12 +33,14 @@
         <li>
             <p>What is black and white and read all over?</p>
             <br>
-            <p onclick="showAnswer('answer', 'A newspaper.')" id="answer">Answer</p>
+            <button onclick="showAnswer('answer', 'A newspaper.')">Click for Answer</button>
+            <span id="answer"></span>
         </li>
         <li>
             <p>What gets bigger the more that is taken away?</p>
             <br>
-            <p onclick="showAnswer('answer2','A hole.')" id="answer2">Answer</p>
+            <button onclick="showAnswer('answer2','A hole.')">Click for Answer</button>
+            <span id="answer2"></span>
         </li>
         <li><p>The more you take of me, the more of me you leave behind. What am I?</p><br><p>Footsteps.</p></li>
         <li><p>I'm not alive, but I can die. What am I?</p><br><p>A battery.</p></li>

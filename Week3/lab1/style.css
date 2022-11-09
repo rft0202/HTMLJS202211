@@ -3,5 +3,5 @@ html, body{
 }
 p{
     border: 1px dashed purple;
-    font-family: Verdana, Tahoma, sans-serif;
+    /*font-family: Verdana, Tahoma, sans-serif;*/
 }
