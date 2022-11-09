@@ -39,6 +39,7 @@ ctx.arc(385,441, 67, 0, (3 * Math.PI),false);
 ctx.closePath();
 ctx.fill();
 ctx.stroke();
+
 //Polygon style
 ctx.fillStyle = "#ff00ff";
 ctx.strokeStyle = "#00ffff";
