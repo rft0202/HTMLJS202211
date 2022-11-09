@@ -40,7 +40,7 @@ ctx.closePath();
 ctx.fill();
 ctx.stroke();
 //Polygon style
-ctx.fillStyle = "#ff0ff";
+ctx.fillStyle = "#ff00ff";
 ctx.strokeStyle = "#00ffff";
 ctx.lineWidth = "5";
 
