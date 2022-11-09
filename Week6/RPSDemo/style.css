@@ -1,0 +1,13 @@
+html, body{
+    margin:0;
+    height:100%;
+}
+body{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+nav{
+    margin: 5px;
+}
