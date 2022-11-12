@@ -1,24 +1,23 @@
+html, button{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: purple;
+}
 body{
     display:flex;
-    justify-content:center;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-image: url(images/rpsbackground.webp);
 }
 nav{
-    display:flex;
-    justify-content:center;
+    margin: 5px;
 }
-#container{
-    box-sizing:border-box;
-    width:1018px;
-    border:1px solid black;
-    padding:7px;
+#c{
+background-color: skyblue;}
+h1, button{
+    border: 3px solid purple;
+    background-color: skyblue;
 }
-canvas{
-    border: 1px solid black;
-    box-sizing:border-box;
-}
-a:link, a:visited{
-    display:inline-block;
-    background-color:yellow;
-    padding:10px;
-    margin:20px;
+button:hover{
+    background-color: rgb(127, 193, 219);
 }

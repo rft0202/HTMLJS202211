@@ -1,13 +1,23 @@
-html, body{
-    margin:0;
-    height:100%;
+html, button{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: purple;
 }
 body{
     display:flex;
     justify-content: center;
     align-items: center;
     text-align: center;
+    background-image: url(images/rpsbackground.webp);
 }
 nav{
     margin: 5px;
+}
+#c{
+background-color: skyblue;}
+h1, button{
+    border: 3px solid purple;
+    background-color: skyblue;
+}
+button:hover{
+    background-color: rgb(127, 193, 219);
 }

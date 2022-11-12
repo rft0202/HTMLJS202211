@@ -1,90 +1,83 @@
-//Array of words
-var rps = [];
-rps[0] = `Rock` 
-rps[1] = `Paper`
-rps[2] = `Scissors`
+//canvas drawing stuff
+var canvas = document.getElementById("c");
+var ctx = canvas.getContext("2d");
 
-//Array of Buttons
-var btn = document.querySelectorAll(`a`)
-//Changes the words in the buttons
-btn[0].innerHTML = rps[0]
-btn[1].innerHTML = rps[1]
-btn[2].innerHTML = rps[2]
+//drawing the fonts
+ctx.font = "40px Trebuchet MS";
+ctx.fillStyle = "purple";
+ctx.strokeStyle = "blue";
+ctx.fillText("Welcome to the RPS Game!", 132, 100);
+ctx.strokeText("Welcome to the RPS Game!", 132, 100);
+//original: 125, 280
 
-//Makes the buttons clickable.
-//Once clicked they call the play function
-btn[0].addEventListener(`click`, function(e){
-    play(0)
-})
-btn[1].addEventListener(`click`, function(e){
-    play(1)
-})
-btn[2].addEventListener(`click`, function(e){
-    play(2)
-})
+//alert("Select rock, paper, or scissors.");
+var rps = ["rock","paper","scissors"];
+//console.log(rps[2]);
 
-//Play function accepts an integer
-//generates an integer 0-2
-//Displays the player's choice and computer's choice
-function play(pChoice)
-{
-    var cChoice = Math.floor(Math.random()*2.999999)
-    
-    alert(rps[pChoice] + " " + rps[cChoice]) 
+document.getElementById("rock").addEventListener('click',function(e){
+    arguments;ctx.clearRect(0, 0, canvas.width, canvas.height);ctx.fillText("You picked " + rps[0] + "!", 250, 200);
+    playGame(rps[0]);
+});
+document.getElementById("paper").addEventListener('click',function(e){
+    arguments;ctx.clearRect(0, 0, canvas.width, canvas.height);ctx.fillText("You picked " + rps[1] + "!", 230, 200);
+    playGame(rps[1]);
+});
+document.getElementById("scissors").addEventListener('click',function(e){
+    arguments;ctx.clearRect(0, 0, canvas.width, canvas.height);ctx.fillText("You picked " + rps[2] + "!", 210, 200);
+    playGame(rps[2]);
+});
 
-    switch(pChoice){
-        case 0:
-            if(cChoice === 0)
-            {
-                //display a tie
-                alert(`You Tied`)
+function playGame(playerChoice){
+    var cpuChoice = Math.floor(Math.random() * 2.99);
+    console.log(cpuChoice, playerChoice);
+
+    switch(playerChoice){
+        case "rock":
+            if(cpuChoice == 0){
+                //rock
+                ctx.fillText("CPU chose Rock. It's a tie!", 180, 300);
             }
-            else if(cChoice === 1)
-            {
-                //display a loss
-                alert(`You Lost`)
+            else if(cpuChoice == 1){
+                //paper
+                ctx.fillText("CPU chose Paper. You lose!", 180, 300);
             }
-            else
-            {
-                //display a win
-                alert(`You Won`)
+            else{
+                //scissors
+                ctx.fillText("CPU chose Scissors. You win!", 180, 300);
             }
+
             break;
 
-            case 1:
-                if(cChoice === 0)
-                {
-                    //display a tie
-                    alert(`You Win`)
-                }
-                else if(cChoice === 1)
-                {
-                    //display a loss
-                    alert(`Tie`)
-                }
-                else
-                {
-                    //display a win
-                    alert(`You Lost`)
-                } 
+        case "paper":
+            if(cpuChoice == 0){
+                //rock
+                ctx.fillText("CPU chose Rock. You win", 180, 300);
+            }
+            else if(cpuChoice == 1){
+                //paper
+                ctx.fillText("CPU chose Paper. It's a tie!", 180, 300);
+            }
+            else{
+                //scissors
+                ctx.fillText("CPU chose Scissors. You lose!", 180, 300);
+            }
+            
             break;
 
-            case 2:
-                if(cChoice === 0)
-                {
-                    //display a tie
-                    alert(`You Lost`)
-                }
-                else if(cChoice === 1)
-                {
-                    //display a loss
-                    alert(`You Win`)
-                }
-                else
-                {
-                    //display a win
-                    alert(`You Tie`)
-                }
-             break;
+        case "scissors":
+            if(cpuChoice == 0){
+                //rock
+                ctx.fillText("CPU chose Rock. You lose!", 180, 300);
+            }
+            else if(cpuChoice == 1){
+                //paper
+                ctx.fillText("CPU chose Paper. You win!", 180, 300);
+            }
+            else{
+                //scissors
+                ctx.fillText("CPU chose Scissors. It's a tie!", 180, 300);
+            }
+            
+            break;
     }
 }
