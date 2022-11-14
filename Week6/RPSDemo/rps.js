@@ -3,27 +3,27 @@ var canvas = document.getElementById("c");
 var ctx = canvas.getContext("2d");
 
 //drawing the fonts
-ctx.font = "40px Trebuchet MS";
-ctx.fillStyle = "purple";
-ctx.strokeStyle = "blue";
-ctx.fillText("Welcome to the RPS Game!", 132, 100);
-ctx.strokeText("Welcome to the RPS Game!", 132, 100);
-//original: 125, 280
+ctx.font = "40px Arial";
+ctx.fillStyle = "blue";
+ctx.strokeStyle = "green";
+ctx.fillText("Welcome to the RPS Game!", 125, 280);
+ctx.strokeText("Welcome to the RPS Game!", 125, 280);
+
 
 //alert("Select rock, paper, or scissors.");
 var rps = ["rock","paper","scissors"];
 //console.log(rps[2]);
 
 document.getElementById("rock").addEventListener('click',function(e){
-    arguments;ctx.clearRect(0, 0, canvas.width, canvas.height);ctx.fillText("You picked " + rps[0] + "!", 250, 200);
+    arguments;alert("You picked " + rps[0] + "!");
     playGame(rps[0]);
 });
 document.getElementById("paper").addEventListener('click',function(e){
-    arguments;ctx.clearRect(0, 0, canvas.width, canvas.height);ctx.fillText("You picked " + rps[1] + "!", 230, 200);
+    arguments;alert("You picked " + rps[1] + "!");
     playGame(rps[1]);
 });
 document.getElementById("scissors").addEventListener('click',function(e){
-    arguments;ctx.clearRect(0, 0, canvas.width, canvas.height);ctx.fillText("You picked " + rps[2] + "!", 210, 200);
+    arguments;alert("You picked " + rps[2] + "!");
     playGame(rps[2]);
 });
 
@@ -35,15 +35,15 @@ function playGame(playerChoice){
         case "rock":
             if(cpuChoice == 0){
                 //rock
-                ctx.fillText("CPU chose Rock. It's a tie!", 180, 300);
+                alert("CPU chose Rock. It's a tie!");
             }
             else if(cpuChoice == 1){
                 //paper
-                ctx.fillText("CPU chose Paper. You lose!", 180, 300);
+                alert("CPU chose Paper. You lose!");
             }
             else{
                 //scissors
-                ctx.fillText("CPU chose Scissors. You win!", 180, 300);
+                alert("CPU chose Scissors. You win!");
             }
 
             break;
@@ -51,15 +51,15 @@ function playGame(playerChoice){
         case "paper":
             if(cpuChoice == 0){
                 //rock
-                ctx.fillText("CPU chose Rock. You win", 180, 300);
+                alert("CPU chose Rock. You win");
             }
             else if(cpuChoice == 1){
                 //paper
-                ctx.fillText("CPU chose Paper. It's a tie!", 180, 300);
+                alert("CPU chose Paper. It's a tie!");
             }
             else{
                 //scissors
-                ctx.fillText("CPU chose Scissors. You lose!", 180, 300);
+                alert("CPU chose Scissors. You lose!");
             }
             
             break;
@@ -67,15 +67,15 @@ function playGame(playerChoice){
         case "scissors":
             if(cpuChoice == 0){
                 //rock
-                ctx.fillText("CPU chose Rock. You lose!", 180, 300);
+                alert("CPU chose Rock. You lose!");
             }
             else if(cpuChoice == 1){
                 //paper
-                ctx.fillText("CPU chose Paper. You win!", 180, 300);
+                alert("CPU chose Paper. You win!");
             }
             else{
                 //scissors
-                ctx.fillText("CPU chose Scissors. It's a tie!", 180, 300);
+                alert("CPU chose Scissors. It's a tie!");
             }
             
             break;
