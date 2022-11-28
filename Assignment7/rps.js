@@ -92,10 +92,11 @@ function draw(fire, water, snow, cfire, cwater, csnow){
         ctx.drawImage(cwater, canvas.width/2 - cwater.width/2, 375);
         ctx.drawImage(csnow, canvas.width/2 - csnow.width/2 + 100, 375);
 
-        drawWinCounters();
+        
 
         ctx.fillText(results, canvas.width/2, 525);
         ctx.restore();
+        //drawWinCounters();
     }
 }
 
@@ -220,6 +221,7 @@ function playGame(playerChoice){
                     
                 break;
         }
+        drawWinCounters();
         if(pFireWins == 3 || pWaterWins == 3 || pSnowWins == 3 || pFireWins > 0 && pWaterWins > 0 && pSnowWins > 0){
             results = "You win the game!";
         }
