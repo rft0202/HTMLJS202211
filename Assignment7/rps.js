@@ -27,6 +27,14 @@ document.addEventListener("keyup",onKeyUp);
 var gameOver = true;
 var results = "Select fire, water, or snow above.";
 
+var pFireWins = 0;
+var pWaterWins = 0;
+var pSnowWins = 0;
+
+var cFireWins = 0;
+var cWaterWins = 0;
+var cSnowWins = 0;
+
 function onKeyDown(e){
     console.log(e.keyCode);
     
@@ -93,8 +101,26 @@ function draw(fire, water, snow, cfire, cwater, csnow){
 
 function drawWinCounters(){
     ctx.fillText("Player Wins", 100, 50);
+        //fire
+        ctx.fillStyle = "red"
+        ctx.fillText(pFireWins, 100, 100);
+        //water
+        ctx.fillStyle = "blue"
+        ctx.fillText(pWaterWins, 100, 150);
+        //snow
+        ctx.fillStyle = "lightblue"
+        ctx.fillText(pSnowWins, 100, 200);
+        ctx.fillStyle = "pink";
     ctx.fillText("CPU Wins", canvas.width - 100, 50);
-
+        //fire
+        ctx.fillStyle = "red"
+        ctx.fillText(cFireWins, canvas.width - 100, 100);
+        //water
+        ctx.fillStyle = "blue"
+        ctx.fillText(cWaterWins, canvas.width - 100, 150);
+        //snow
+        ctx.fillStyle = "lightblue"
+        ctx.fillText(cSnowWins, canvas.width - 100, 200);
 }
 
 //alert("Select fire, water, or snow.");
@@ -134,12 +160,14 @@ function playGame(playerChoice){
                         //alert("CPU chose water. You lose!");
                         results = "CPU chose water. You lose!";
                         draw(hfire, water, snow, fire, hwater, snow);
+                        cWaterWins += 1;
                 }
                 else{
                         //snow
                         //alert("CPU chose snow. You win!");
                         results = "CPU chose snow. You win!";
                         draw(hfire, water, snow, fire, water, hsnow);
+                        pFireWins += 1;
                 }
 
                 break;
@@ -150,6 +178,7 @@ function playGame(playerChoice){
                         //alert("CPU chose fire. You win");
                         results = "CPU chose fire. You win!";
                         draw(fire, hwater, snow, hfire, water, snow);
+                        pWaterWins += 1;
                 }
                 else if(cpuChoice == 1){
                         //water
@@ -162,6 +191,7 @@ function playGame(playerChoice){
                         //alert("CPU chose snow. You lose!");
                         results = "CPU chose snow. You lose!";
                         draw(fire, hwater, snow, fire, water, hsnow);
+                        cSnowWins += 1;
                 }
                     
                 break;
@@ -172,12 +202,14 @@ function playGame(playerChoice){
                         //alert("CPU chose fire. You lose!");
                         results = "CPU chose fire. You lose!";
                         draw(fire, water, hsnow, hfire, water, snow);
+                        cFireWins += 1;
                 }
                 else if(cpuChoice == 1){
                         //water
                         //alert("CPU chose water. You win!");
                         results = "CPU chose water. You win!";
                         draw(fire, water, hsnow, fire, hwater, snow);
+                        pWaterWins += 1;
                 }
                 else{
                         //snow
@@ -187,6 +219,12 @@ function playGame(playerChoice){
                 }
                     
                 break;
+        }
+        if(pFireWins == 3 || pWaterWins == 3 || pSnowWins == 3 || pFireWins > 0 && pWaterWins > 0 && pSnowWins > 0){
+            results = "You win the game!";
+        }
+        if(cFireWins == 3 || cWaterWins == 3 || cSnowWins == 3 || cFireWins > 0 && cWaterWins > 0 && cSnowWins > 0){
+            results = "You lose the game!";
         }
     }
 }
