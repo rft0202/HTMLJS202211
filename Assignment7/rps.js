@@ -29,7 +29,7 @@ var results = "Select fire, water, or snow above.";
 
 function onKeyDown(e){
     console.log(e.keyCode);
-
+    
 }
 
 function onKeyUp(e){
@@ -37,7 +37,21 @@ function onKeyUp(e){
         console.log("You pressed the spacebar");
         gameOver = false;
         draw(fire, water, snow, fire, water, snow);
+    }else{
+        if(e.keyCode == 82) {
+            console.log("You pressed r");
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+            //add style
+            ctx.fillText("Rules", canvas.width/2, 50);
+            ctx.fillText("Fire beats Snow.", canvas.width/2, 100);
+            ctx.fillText("Water beats Fire.", canvas.width/2, 140);
+            ctx.fillText("Snow beats Water.", canvas.width/2, 180);
+            ctx.fillText("You win the game when you", canvas.width/2, 260);
+            ctx.fillText("win three rounds with the same element", canvas.width/2, 300);
+            ctx.fillText("or three rounds with each element.", canvas.width/2, 340);
+        }
     }
+    
 }
 
 
@@ -50,6 +64,7 @@ function draw(fire, water, snow, cfire, cwater, csnow){
         ctx.textAlign = "center";
         ctx.fillText("Welcome to Card-Jitsu!", canvas.width/2, 280);
         ctx.fillText("Press Space to Start", canvas.width/2, 320);
+        ctx.fillText("Press 'r' for the Rules", canvas.width/2, 360);
         ctx.strokeText("Welcome to Card-Jitsu!", canvas.width/2, 280);
     }
     else{
@@ -69,9 +84,17 @@ function draw(fire, water, snow, cfire, cwater, csnow){
         ctx.drawImage(cwater, canvas.width/2 - cwater.width/2, 375);
         ctx.drawImage(csnow, canvas.width/2 - csnow.width/2 + 100, 375);
 
+        drawWinCounters();
+
         ctx.fillText(results, canvas.width/2, 525);
         ctx.restore();
     }
+}
+
+function drawWinCounters(){
+    ctx.fillText("Player Wins", 100, 50);
+    ctx.fillText("CPU Wins", canvas.width - 100, 50);
+
 }
 
 //alert("Select fire, water, or snow.");
