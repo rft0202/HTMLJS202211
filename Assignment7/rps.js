@@ -37,7 +37,9 @@ var cSnowWins = 0;
 
 function onKeyDown(e){
     console.log(e.keyCode);
-    
+    if(gameOver = true){
+        restartGame();
+    }
 }
 
 function onKeyUp(e){
@@ -56,7 +58,7 @@ function onKeyUp(e){
             ctx.fillText("Snow beats Water.", canvas.width/2, 180);
             ctx.fillText("You win the game when you", canvas.width/2, 260);
             ctx.fillText("win three rounds with the same element", canvas.width/2, 300);
-            ctx.fillText("or three rounds with each element.", canvas.width/2, 340);
+            ctx.fillText("or one round with each element.", canvas.width/2, 340);
         }
     }
     
@@ -96,12 +98,11 @@ function draw(fire, water, snow, cfire, cwater, csnow){
 
         ctx.fillText(results, canvas.width/2, 525);
         ctx.restore();
-        //drawWinCounters();
     }
 }
 
 function drawWinCounters(){
-    ctx.fillText("Player Wins", 100, 50);
+    ctx.fillText("Player Wins", 110, 50);
         //fire
         ctx.fillStyle = "red"
         ctx.fillText(pFireWins, 100, 100);
@@ -122,6 +123,7 @@ function drawWinCounters(){
         //snow
         ctx.fillStyle = "lightblue"
         ctx.fillText(cSnowWins, canvas.width - 100, 200);
+        ctx.fillStyle = "pink";
 }
 
 //alert("Select fire, water, or snow.");
@@ -223,10 +225,16 @@ function playGame(playerChoice){
         }
         drawWinCounters();
         if(pFireWins == 3 || pWaterWins == 3 || pSnowWins == 3 || pFireWins > 0 && pWaterWins > 0 && pSnowWins > 0){
-            results = "You win the game!";
+            ctx.fillText("You win the game!", canvas.width/2, 600);
+            gameOver = true;
         }
         if(cFireWins == 3 || cWaterWins == 3 || cSnowWins == 3 || cFireWins > 0 && cWaterWins > 0 && cSnowWins > 0){
-            results = "You lose the game!";
+            ctx.fillText("You lose the game!", canvas.width/2, 600);
+            gameOver = true;
         }
     }
+}
+
+function restartGame(){
+    location.reload();
 }
