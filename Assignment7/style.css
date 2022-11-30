@@ -1,6 +1,8 @@
 html, body{
     margin:0;
     height:100%;
+    font-family: Blambot Custom;
+    background-color: #0280CC;
 }
 body{
     display:flex;
@@ -10,4 +12,13 @@ body{
 }
 nav{
     margin: 5px;
+}
+button{
+    background-color: #0280CC;
+    border: 1px solid #005298;
+    color: white;
+    font-size: large;
+}
+button:hover{
+    background-color: #005298;
 }

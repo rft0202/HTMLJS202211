@@ -19,7 +19,10 @@ hsnow.src = "images/snow2.png";
 
 hsnow.onload = function(){
     draw(fire, water, snow, fire, water, snow);
+    console.log(document.fonts.check("40px Blambot Custom"));
 }
+// document.fonts.check("40px Blambot Custom") = function(){
+// }
 
 document.addEventListener("keydown",onKeyDown);
 document.addEventListener("keyup",onKeyUp);
@@ -34,6 +37,11 @@ var pSnowWins = 0;
 var cFireWins = 0;
 var cWaterWins = 0;
 var cSnowWins = 0;
+
+//style
+ctx.font = "40px Blambot Custom";
+ctx.textAlign = "center";
+ctx.strokeStyle = "deepskyblue";
 
 function onKeyDown(e){
     console.log(e.keyCode);
@@ -53,13 +61,21 @@ function onKeyUp(e){
             ctx.clearRect(0,0,canvas.width,canvas.height);
             //add style
             ctx.fillText("Rules", canvas.width/2, 50);
+            ctx.strokeText("Rules", canvas.width/2, 50);
             ctx.fillText("Fire beats Snow.", canvas.width/2, 100);
+            ctx.strokeText("Fire beats Snow.", canvas.width/2, 100);
             ctx.fillText("Water beats Fire.", canvas.width/2, 140);
+            ctx.strokeText("Water beats Fire.", canvas.width/2, 140);
             ctx.fillText("Snow beats Water.", canvas.width/2, 180);
+            ctx.strokeText("Snow beats Water.", canvas.width/2, 180);
             ctx.fillText("You win the game when you", canvas.width/2, 260);
+            ctx.strokeText("You win the game when you", canvas.width/2, 260);
             ctx.fillText("win three rounds with the same element", canvas.width/2, 300);
+            ctx.strokeText("win three rounds with the same element", canvas.width/2, 300);
             ctx.fillText("or one round with each element.", canvas.width/2, 340);
+            ctx.strokeText("or one round with each element.", canvas.width/2, 340);
             ctx.fillText("Press Space to Start", canvas.width/2, 420);
+            ctx.strokeText("Press Space to Start", canvas.width/2, 420);
         }
     }
     
@@ -69,28 +85,33 @@ function onKeyUp(e){
 function draw(fire, water, snow, cfire, cwater, csnow){
     if(gameOver == true){
         //drawing the fonts
-        ctx.font = "40px Arial";
-        ctx.fillStyle = "blue";
-        ctx.strokeStyle = "green";
+        ctx.font = "40px Blambot Custom";
+        ctx.fillStyle = "white";
+        ctx.strokeStyle = "deepskyblue";
         ctx.textAlign = "center";
         ctx.fillText("Welcome to Card-Jitsu!", canvas.width/2, 280);
-        ctx.fillText("Press Space to Start", canvas.width/2, 320);
-        ctx.fillText("Press 'r' for the Rules", canvas.width/2, 360);
         ctx.strokeText("Welcome to Card-Jitsu!", canvas.width/2, 280);
+        ctx.fillText("Press Space to Start", canvas.width/2, 320);
+        ctx.strokeText("Press Space to Start", canvas.width/2, 320);
+        ctx.fillText("Press 'r' for the Rules", canvas.width/2, 360);
+        ctx.strokeText("Press 'r' for the Rules", canvas.width/2, 360);
     }
     else{
 
         ctx.save();
         ctx.clearRect(0,0,canvas.width,canvas.height);
-        ctx.font = "30px Arial";
+        ctx.font = "30px Blambot Custom";
         ctx.textAlign = "center";
-        ctx.fillStyle = "pink";
+        ctx.fillStyle = "deepskyblue";
+        ctx.strokeStyle = "black";
         ctx.fillText("Player Choice", canvas.width/2, 50);
+        ctx.strokeText("Player Choice", canvas.width/2, 50);
         ctx.drawImage(fire, canvas.width/2 - fire.width/2 - 200, 75);
         ctx.drawImage(water, canvas.width/2 - water.width/2, 75);
         ctx.drawImage(snow, canvas.width/2 - snow.width/2 + 200, 75);
         //computer choices
         ctx.fillText("Computer Choice", canvas.width/2, 300);
+        ctx.strokeText("Computer Choice", canvas.width/2, 300);
         ctx.drawImage(cfire, canvas.width/2 - cfire.width/2 - 200, 325);
         ctx.drawImage(cwater, canvas.width/2 - cwater.width/2, 325);
         ctx.drawImage(csnow, canvas.width/2 - csnow.width/2 + 200, 325);
@@ -98,34 +119,38 @@ function draw(fire, water, snow, cfire, cwater, csnow){
         
 
         ctx.fillText(results, canvas.width/2, 545);
+        ctx.strokeText(results, canvas.width/2, 545);
         ctx.restore();
     }
 }
 
 function drawWinCounters(){
+    ctx.fillStyle = "deepskyblue"
+    ctx.strokeStyle = "black";
     ctx.save();
-    ctx.fillText("Player Wins", 110, 50);
+    ctx.fillText("Player Wins", 140, 50);
+    ctx.strokeText("Player Wins", 140, 50);
         //fire
-        ctx.fillStyle = "red"
+        ctx.fillStyle = "#D41128"
         ctx.fillText(pFireWins, 100, 100);
         //water
-        ctx.fillStyle = "blue"
+        ctx.fillStyle = "#0C4095"
         ctx.fillText(pWaterWins, 100, 150);
         //snow
-        ctx.fillStyle = "lightblue"
+        ctx.fillStyle = "#91C7DB"
         ctx.fillText(pSnowWins, 100, 200);
-        ctx.fillStyle = "pink";
-    ctx.fillText("CPU Wins", canvas.width - 100, 50);
+    ctx.restore();
+    ctx.fillText("CPU Wins", canvas.width - 115, 50);
+    ctx.strokeText("CPU Wins", canvas.width - 115, 50);
         //fire
-        ctx.fillStyle = "red"
+        ctx.fillStyle = "#D41128"
         ctx.fillText(cFireWins, canvas.width - 100, 100);
         //water
-        ctx.fillStyle = "blue"
+        ctx.fillStyle = "#0C4095"
         ctx.fillText(cWaterWins, canvas.width - 100, 150);
         //snow
-        ctx.fillStyle = "lightblue"
+        ctx.fillStyle = "#91C7DB"
         ctx.fillText(cSnowWins, canvas.width - 100, 200);
-        ctx.fillStyle = "pink";
     ctx.restore();
 }
 
@@ -227,12 +252,17 @@ function playGame(playerChoice){
                 break;
         }
         drawWinCounters();
+        ctx.restore();
+        ctx.fillStyle = "black"
+        ctx.strokeStyle = "deepskyblue"
         if(pFireWins == 3 || pWaterWins == 3 || pSnowWins == 3 || pFireWins > 0 && pWaterWins > 0 && pSnowWins > 0){
             ctx.fillText("You win the game!", canvas.width/2, 585);
+            ctx.strokeText("You win the game!", canvas.width/2, 585);
             gameOver = true;
         }
         if(cFireWins == 3 || cWaterWins == 3 || cSnowWins == 3 || cFireWins > 0 && cWaterWins > 0 && cSnowWins > 0){
             ctx.fillText("You lose the game!", canvas.width/2, 585);
+            ctx.strokeText("You lose the game!", canvas.width/2, 585);
             gameOver = true;
         }
     }
