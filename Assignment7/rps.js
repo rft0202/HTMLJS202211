@@ -59,6 +59,7 @@ function onKeyUp(e){
             ctx.fillText("You win the game when you", canvas.width/2, 260);
             ctx.fillText("win three rounds with the same element", canvas.width/2, 300);
             ctx.fillText("or one round with each element.", canvas.width/2, 340);
+            ctx.fillText("Press Space to Start", canvas.width/2, 420);
         }
     }
     
@@ -84,24 +85,25 @@ function draw(fire, water, snow, cfire, cwater, csnow){
         ctx.font = "30px Arial";
         ctx.textAlign = "center";
         ctx.fillStyle = "pink";
-        ctx.fillText("Player Choice", canvas.width/2, 100);
-        ctx.drawImage(fire, canvas.width/2 - fire.width/2 - 100, 150);
-        ctx.drawImage(water, canvas.width/2 - water.width/2, 150);
-        ctx.drawImage(snow, canvas.width/2 - snow.width/2 + 100, 150);
+        ctx.fillText("Player Choice", canvas.width/2, 50);
+        ctx.drawImage(fire, canvas.width/2 - fire.width/2 - 200, 75);
+        ctx.drawImage(water, canvas.width/2 - water.width/2, 75);
+        ctx.drawImage(snow, canvas.width/2 - snow.width/2 + 200, 75);
         //computer choices
-        ctx.fillText("Computer Choice", canvas.width/2, 325);
-        ctx.drawImage(cfire, canvas.width/2 - cfire.width/2 - 100, 375);
-        ctx.drawImage(cwater, canvas.width/2 - cwater.width/2, 375);
-        ctx.drawImage(csnow, canvas.width/2 - csnow.width/2 + 100, 375);
+        ctx.fillText("Computer Choice", canvas.width/2, 300);
+        ctx.drawImage(cfire, canvas.width/2 - cfire.width/2 - 200, 325);
+        ctx.drawImage(cwater, canvas.width/2 - cwater.width/2, 325);
+        ctx.drawImage(csnow, canvas.width/2 - csnow.width/2 + 200, 325);
 
         
 
-        ctx.fillText(results, canvas.width/2, 525);
+        ctx.fillText(results, canvas.width/2, 545);
         ctx.restore();
     }
 }
 
 function drawWinCounters(){
+    ctx.save();
     ctx.fillText("Player Wins", 110, 50);
         //fire
         ctx.fillStyle = "red"
@@ -124,6 +126,7 @@ function drawWinCounters(){
         ctx.fillStyle = "lightblue"
         ctx.fillText(cSnowWins, canvas.width - 100, 200);
         ctx.fillStyle = "pink";
+    ctx.restore();
 }
 
 //alert("Select fire, water, or snow.");
@@ -225,11 +228,11 @@ function playGame(playerChoice){
         }
         drawWinCounters();
         if(pFireWins == 3 || pWaterWins == 3 || pSnowWins == 3 || pFireWins > 0 && pWaterWins > 0 && pSnowWins > 0){
-            ctx.fillText("You win the game!", canvas.width/2, 600);
+            ctx.fillText("You win the game!", canvas.width/2, 585);
             gameOver = true;
         }
         if(cFireWins == 3 || cWaterWins == 3 || cSnowWins == 3 || cFireWins > 0 && cWaterWins > 0 && cSnowWins > 0){
-            ctx.fillText("You lose the game!", canvas.width/2, 600);
+            ctx.fillText("You lose the game!", canvas.width/2, 585);
             gameOver = true;
         }
     }
