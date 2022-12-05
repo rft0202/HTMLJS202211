@@ -11,7 +11,7 @@ var carWidth = 50;
 
 var startFuel = randomNumber(600, canvas.width, 600);
 var fuel = startFuel;
-var fuelBarWidth = 300;
+var fuelBarWidth = 512;
 var gameOver = true;
 
 var seconds = 3;
