@@ -49,7 +49,7 @@ function keyPressDown(e){
 function main(){
     ctx.clearRect(0,0,canvas.width,canvas.height);
     if(gameOver){
-        ctx.fillStyle = "black";
+        ctx.fillStyle = "white";
         ctx.font = "30px Garamond";
         ctx.textAlign = "center";
         ctx.fillText("Press Space to Start", canvas.width/2, canvas.height/2);
@@ -89,11 +89,11 @@ function main(){
 }
 
 function drawStartFinish(){
-    ctx.fillStyle = "black";
+    ctx.fillStyle = "white";
     //start line
-    ctx.fillRect(start, 50, 10, canvas.height/2);
+    ctx.fillRect(start + 1, canvas.height/2 - 100, 10, 98);
     //finish line
-    ctx.fillRect(finish, 50, 10, canvas.height/2);
+    ctx.fillRect(finish - 10, canvas.height/2 - 100, 10, 98);
 }
 
 function drawCar(){
@@ -109,7 +109,7 @@ function drawMonster(){
 
 function drawFuelBar(){
     var currentBarWidth = fuelBarWidth * (fuel/startFuel);
-    ctx.fillStyle = "black";
+    ctx.fillStyle = "white";
     ctx.fillRect(start, 30, fuelBarWidth, 10);
     ctx.font = "25px Garamond";
     ctx.fillText("Stamina", start, 25);
@@ -121,12 +121,12 @@ function drawFuelBar(){
 
 function drawResults(){
     if(carPos + carWidth > finish){
-        ctx.fillStyle = "black";
+        ctx.fillStyle = "white";
         ctx.font = "25px Garamond";
         ctx.textAlign = "center";
         ctx.fillText("You escaped...You Win!", canvas.width/2, canvas.height/2);
     }else{
-        ctx.fillStyle = "black";
+        ctx.fillStyle = "white";
         ctx.font = "25px Garamond";
         ctx.textAlign = "center";
         ctx.fillText("You ran out of stamina...You Lose!", canvas.width/2, canvas.height/2);
@@ -146,7 +146,7 @@ function runStartTimer(){
 }
 
 function drawStartTimer(){
-    ctx.fillStyle = "black";
+    ctx.fillStyle = "white";
     ctx.font = "25px Garamond";
     ctx.textAlign = "center";
     ctx.fillText(seconds, canvas.width/2, canvas.height/2);
