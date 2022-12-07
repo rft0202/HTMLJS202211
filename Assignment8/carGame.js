@@ -8,7 +8,11 @@ var finish = 956;
 var carPos = 2;
 var speed = 3;
 var carWidth = 50;
+var monsterPos = -50;
+var monsterWidth = 50
 
+//var startFuel = canvas.width +600
+//for testing purposes^
 var startFuel = randomNumber(600, canvas.width, 600);
 var fuel = startFuel;
 var fuelBarWidth = 512;
@@ -25,6 +29,9 @@ bikeSprite.src = "images/bike.png";
 bikeSprite.onload = function(){
     main();
 }
+
+var monsterSprite = new Image();
+monsterSprite.src = "images/placeholder.png";
 
 //add some event listeners
 document.addEventListener("keydown", keyPressDown);
@@ -55,11 +62,19 @@ function main(){
             if(fuel > 0){
                 carPos += speed;
                 fuel -= speed;
+                monsterPos += speed;
             }
+        }
+        if(carPos > canvas.width - carWidth){
+            carPos = canvas.width - carWidth;
+            speed = 0;
+        }
+        if(monsterPos > finish - monsterWidth){
+            monsterPos = finish - monsterWidth;
         }
         drawStartFinish();
         drawCar();
-
+        drawMonster();
 
 
         drawFuelBar();
@@ -76,9 +91,9 @@ function main(){
 function drawStartFinish(){
     ctx.fillStyle = "black";
     //start line
-    ctx.fillRect(start, 50, 10, 500);
+    ctx.fillRect(start, 50, 10, canvas.height/2);
     //finish line
-    ctx.fillRect(finish, 50, 10, 500);
+    ctx.fillRect(finish, 50, 10, canvas.height/2);
 }
 
 function drawCar(){
@@ -86,6 +101,10 @@ function drawCar(){
     //ctx.fillStyle = "red";
     //ctx.fillRect(carPos, canvas.height/2, carWidth, 20);
     ctx.drawImage(bikeSprite, carPos, canvas.height/2, carWidth, 30)
+}
+
+function drawMonster(){
+    ctx.drawImage(monsterSprite, monsterPos, canvas.height/2, monsterWidth, 30)
 }
 
 function drawFuelBar(){
@@ -105,12 +124,12 @@ function drawResults(){
         ctx.fillStyle = "black";
         ctx.font = "25px Arial";
         ctx.textAlign = "center";
-        ctx.fillText("You made it to the finish...You Win!", canvas.width/2, canvas.height/2);
+        ctx.fillText("You escaped...You Win!", canvas.width/2, canvas.height/2);
     }else{
         ctx.fillStyle = "black";
         ctx.font = "25px Arial";
         ctx.textAlign = "center";
-        ctx.fillText("You ran out of fuel...You Lose!", canvas.width/2, canvas.height/2);
+        ctx.fillText("You ran out of stamina...You Lose!", canvas.width/2, canvas.height/2);
     }
 }
 
