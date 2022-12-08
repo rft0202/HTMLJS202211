@@ -46,7 +46,7 @@ function keyPressDown(e){
     if(e.keyCode == 32 && gameOver){
         gameOver = false;
     }
-    if(fuel <= 0){
+    if(fuel <= 0 || carPos == canvas.width - carWidth){
         //restart game
         restartGame();
     }
