@@ -7,15 +7,17 @@ var start = 58;
 var finish = 956;
 var carPos = 2;
 var speed = 3;
-var carWidth = 50;
-var monsterPos = -50;
-var monsterWidth = 50
+var carWidth = 70;
+var monsterPos = -70;
+var monsterWidth = 60
 
 //var startFuel = canvas.width +600
 //for testing purposes^
 var startFuel = randomNumber(600, canvas.width, 600);
 var fuel = startFuel;
 var fuelBarWidth = 512;
+var fuelBarSprite = new Image();
+fuelBarSprite.src = "images/fuelbar.png";
 var gameOver = true;
 
 var seconds = 3;
@@ -23,16 +25,20 @@ var fps = 60;
 var frames = fps;
 
 //load game sprites
-var bikeSprite = new Image();
-bikeSprite.src = "images/bike.png";
+var manSprite = new Image();
+manSprite.src = "images/lodger.png.png";
 
-bikeSprite.onload = function(){
-    main();
-}
+
 
 var monsterSprite = new Image();
-monsterSprite.src = "images/placeholder.png";
+monsterSprite.src = "images/breachghostcropped.png";
 
+var forestBackground = new Image();
+forestBackground.src = "images/pixelforest.png"
+
+forestBackground.onload = function(){
+    main();
+}
 //add some event listeners
 document.addEventListener("keydown", keyPressDown);
 
@@ -48,6 +54,7 @@ function keyPressDown(e){
 
 function main(){
     ctx.clearRect(0,0,canvas.width,canvas.height);
+    drawBackground();
     if(gameOver){
         ctx.fillStyle = "white";
         ctx.font = "30px Garamond";
@@ -88,33 +95,56 @@ function main(){
     timer = requestAnimationFrame(main);
 }
 
+function drawBackground(){
+    ctx.drawImage(forestBackground, 0, 0);
+    ctx.save();
+    //ground
+    ctx.fillStyle = "black";
+    ctx.fillRect(0, canvas.height/2 + 30, canvas.width, canvas.height);
+    //house
+    ctx.fillStyle = "rgb(49, 49, 49)";
+    ctx.fillRect(start, 85, 900, 330);
+    //roof
+    ctx.fillStyle = "rgb(49, 49, 49)";    
+    ctx.beginPath();
+    ctx.moveTo(start, 85);
+    ctx.lineTo(91, 42);
+    ctx.lineTo(919, 42);
+    ctx.lineTo(finish, 85);
+    ctx.lineTo(start, 85);
+    ctx.closePath();
+    ctx.fill()
+    ctx.restore();
+}
+
 function drawStartFinish(){
     ctx.fillStyle = "white";
     //start line
-    ctx.fillRect(start + 1, canvas.height/2 - 100, 10, 98);
+    ctx.fillRect(start + 1, canvas.height/2 - 70, 10, 100);
     //finish line
-    ctx.fillRect(finish - 10, canvas.height/2 - 100, 10, 98);
+    ctx.fillRect(finish - 10, canvas.height/2 - 70, 10, 100);
 }
 
 function drawCar(){
     //draw a car
     //ctx.fillStyle = "red";
     //ctx.fillRect(carPos, canvas.height/2, carWidth, 20);
-    ctx.drawImage(bikeSprite, carPos, canvas.height/2, carWidth, 30)
+    ctx.drawImage(manSprite, carPos, canvas.height/2 - 55, carWidth, 90)
 }
 
 function drawMonster(){
-    ctx.drawImage(monsterSprite, monsterPos, canvas.height/2, monsterWidth, 30)
+    ctx.drawImage(monsterSprite, monsterPos, canvas.height/2 - 55, monsterWidth, 90)
 }
 
 function drawFuelBar(){
     var currentBarWidth = fuelBarWidth * (fuel/startFuel);
-    ctx.fillStyle = "white";
-    ctx.fillRect(start, 30, fuelBarWidth, 10);
+    //ctx.fillStyle = "white";
+    //ctx.fillRect(start, 30, fuelBarWidth, 10);
+    ctx.drawImage(fuelBarSprite, start, 30, fuelBarWidth, 10);
     ctx.font = "25px Garamond";
     ctx.fillText("Stamina", start, 25);
     if(fuel > 0){
-        ctx.fillStyle = "green";
+        ctx.fillStyle = "white";
         ctx.fillRect(start, 30, currentBarWidth, 10);
     }
 }
