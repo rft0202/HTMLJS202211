@@ -1,0 +1,21 @@
+html,body{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    color: white;
+}
+body{
+    background-image: url(images/asteroidbelt2.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+canvas{
+    border: 1px solid blue;
+    background-color: black;
+}
+header{
+    font-family: Asteroid7337;
+}
+#container{
+    background-color: navy;
+}
