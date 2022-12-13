@@ -4,7 +4,7 @@ var timer = requestAnimationFrame(main);
 var gameOver = true;
 var score = 0;
 var highScore = 0;
-var currentState = 0
+var currentState = 0;
 var gameState = [];
 
 //asteroid variables
@@ -15,9 +15,14 @@ var asteroids = [];
 var ship = new PlayerShip();
 
 //Star Power Up
+var isPowerUpActive = false;
 var invincible = false;
+var invincibleHit = false;
 var star = new Image();
 star.src = "images/starpowerup.png"
+var powerUp = new Star();
+
+
 
 //Game Over Screen
 var gameOverScreen = new Image();
@@ -89,6 +94,7 @@ function pressKeyUp(e){
                 gameOver = false;
                 main();
                 scoreTimer();
+                //powerUpTimer();
                 gameStart();
             }
             
@@ -98,13 +104,14 @@ function pressKeyUp(e){
         
 //Star Class
 function Star(){
-    this.radius = randomRange(15, 2);
-    this.x = randomRange(canvas.width - this.radius, this.radius);
-    this.y = randomRange(canvas.height - this.radius, this.radius) - canvas.height;
-    this.vy = randomRange(10, 5);
+    this.w = 40;
+    this.h = 40;
+    this.x = randomRange(canvas.width - this.w, this.w);
+    this.y = randomRange(canvas.height - this.h, this.h) + canvas.height;
+    this.vy = 7;
 
     this.drawStar = function(){
-        ctx.drawImage(star, this.x, this.y);
+        ctx.drawImage(star, this.x, this.y, this.w, this.h);
     }
     
 }
@@ -269,12 +276,13 @@ gameState[1] = function(){
     }
 
     for(var i = 0; i<asteroids.length; i++){
+        ctx.save();
         var dX = ship.x - asteroids[i].x;
         var dY = ship.y - asteroids[i].y;
         var distance = Math.sqrt((dX*dX)+(dY*dY));
 
         //collision detection happens here
-        if(detectCollision(distance, (ship.height/2 + asteroids[i].radius))){
+        if(detectCollision(distance, (ship.height/2 + asteroids[i].radius)) && !invincible){
             //console.log("Hit Asteroid");
             //alert("Hit Asteroid");
             gameOver = true;
@@ -282,6 +290,14 @@ gameState[1] = function(){
             main();
             return;
         }
+        else if(detectCollision(distance, (ship.height/2 + asteroids[i].radius)) && invincible){
+            invincible = false;
+            isPowerUpActive = false;
+            asteroids[i].x = asteroids[i].x + canvas.width;
+            asteroids[i].y = asteroids[i].y + canvas.height;
+            console.log("Power Up Inactive");
+        }
+        ctx.restore();
 
         if(asteroids[i].y > canvas.height + asteroids[i].radius){
             asteroids[i].y = randomRange(canvas.height - asteroids[i].radius, asteroids[i].radius) - canvas.height;
@@ -295,31 +311,36 @@ gameState[1] = function(){
         
     //star
     
-    do {
-        if(score % 10 == 0 && score > 9){
-            console.log("Star")
-            star[i] = new Star();
-        }
-    }
-    while(gameState = 1);
+    powerUp.drawStar();
+    powerUp.y += powerUp.vy;
 
-    for(var i = 0; i<star.length; i++){
-        var dX = ship.x - star[i].x;
-        var dY = ship.y - star[i].y;
-        var distance = Math.sqrt((dX*dX)+(dY*dY));
+    var dX = ship.x - powerUp.x;
+    var dY = ship.y - powerUp.y;
+    var distance = Math.sqrt((dX*dX)+(dY*dY));
     
-        //collision detection happens here
-        if(detectCollision(distance, (ship.height/2 + star[i].radius))){
-             invincible = true
-        }
-    
-        if(star[i].y > canvas.height + star[i].radius){
-            star[i].y = randomRange(canvas.height - star[i].radius, star[i].radius) - canvas.height;
-            star[i].x = randomRange(canvas.width - star[i].radius, star[i].radius);
-        }
-            
-        star[i].y += star[i].vy;
-        star[i].drawStar();
+    //collision detection happens here
+    if(detectCollision(distance, (ship.height/2 + powerUp.h))){
+        invincible = true;
+        isPowerUpActive = true;
+        console.log("Power Up Active");
+    }
+    if(!isPowerUpActive){
+        invincible = false
+    }
+
+    //Invincible mode
+    if(invincible){
+        ctx.save();
+        //ctx.fillStyle = "rgba(,,,alphaValue)"
+        ctx.strokeStyle = "pink"
+        ctx.lineWidth = "3";
+
+        ctx.beginPath();
+        ctx.arc(ship.x, ship.y, 20, 0, (3 * Math.PI),false);
+        ctx.closePath();
+        //ctx.fill();
+        ctx.stroke();
+        ctx.restore();
     }
 
     //draw the ship
@@ -369,10 +390,8 @@ function gameStart(){
     for(var i = 0; i<numAsteroids; i++){
         asteroids[i] = new Asteroid();
     }
-    if(score % 10 == 0 && score > 9){
-        console.log("Star")
-        star[i] = new Star();
-    }
+
+    powerUp.y = randomRange(canvas.height - this.h, this.h) + canvas.height;
 
     ship = new PlayerShip();
 }
@@ -393,7 +412,24 @@ function scoreTimer(){
             numAsteroids += 5;
             console.log(numAsteroids);
         }
+
+        if(score % 10 == 0){
+            powerUpTimer();
+        }
         //calls scoreTimer every second
         setTimeout(scoreTimer, 1000);
+    }
+}
+
+function powerUpTimer(){
+    if(!gameOver){
+        powerUp.x = randomRange(canvas.width - powerUp.w, powerUp.w);
+        powerUp.y = randomRange(canvas.height - powerUp.h, powerUp.h) -canvas.height;
+
+        console.log("Star")
+       
+        //calls scoreTimer every second
+        //setTimeout(powerUpTimer, 10000);
+        
     }
 }
