@@ -19,8 +19,12 @@ var invincible = false;
 var star = new Image();
 star.src = "images/starpowerup.png"
 
-star.onload = function(){
-    gameStart();
+//Game Over Screen
+var gameOverScreen = new Image();
+gameOverScreen.src = "images/gameover.png"
+
+gameOverScreen.onload = function(){
+    main();
 }
 
 //create keyboard event handlers
@@ -330,6 +334,7 @@ gameState[1] = function(){
 
 //Game Over State
 gameState[2] = function(){
+    ctx.drawImage(gameOverScreen, 0, 0);
     //code for game over menu
     if(score > highScore){
         highScore = score;
