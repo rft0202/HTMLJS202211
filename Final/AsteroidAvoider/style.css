@@ -13,7 +13,7 @@ canvas{
     border: 1px solid blue;
     background-color: black;
 }
-header{
+header, footer{
     font-family: Asteroid7337;
 }
 #container{
