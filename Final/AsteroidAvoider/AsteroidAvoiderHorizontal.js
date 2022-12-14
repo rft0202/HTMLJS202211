@@ -157,7 +157,7 @@ function PlayerShip(){
     this.right = false;
     this.vx = 0;
     this.vy = 0;
-    this.flameLength = 30;
+    //this.flameLength = 0;
     this.flameWidth = 30;
 
     this.drawShip = function (){
@@ -165,22 +165,22 @@ function PlayerShip(){
         ctx.translate(this.x,this.y);
 
         //draw the thruster
-        if(this.up || this.left || this.right){
+        if(this.up || this.down|| this.right){
             ctx.save();
-            if(this.flameLength == 30){
-                this.flameLength = 20;
+            if(this.flameWidth == 30){
+                this.flameWidth = 20;
                 ctx.fillStyle = "yellow";
             }
             else{
-                this.flameLength = 30
+                this.flameWidth = 30
                 ctx.fillStyle = "orange"
             }
             //draw the flame
             ctx.beginPath();
-            ctx.moveTo(-this.flameWidth, this.flameLength);
-            ctx.lineTo(5, 5);
-            ctx.lineTo(-5, 5);
-            ctx.lineTo(-this.flameWidth, this.flameLength);
+            ctx.moveTo(-this.flameWidth, 0);
+            ctx.lineTo(8, -5);
+            ctx.lineTo(-8, 5);
+            ctx.lineTo(-this.flameWidth, 0);
             ctx.closePath();
             ctx.fill();
             ctx.restore();
