@@ -13,7 +13,7 @@ var caveData ={
 			
 			
 		],
-		src:`images/theatertiles.png`,
+		src:`images/theaterspritesheet.png`,
 	},
 	states:
 	[		
@@ -21,28 +21,28 @@ var caveData ={
 				fps:5,
 				cycle:false,
 				frames:[
-					{width:32, height:32, startX:-1, startY:0}
+					{width:32, height:32, startX:0, startY:0}
 				]
 			},
 			{
 				fps:1,
 				cycle:false,
-				frames:[{width:32, height:32, startX:31.5, startY:0}]
+				frames:[{width:32, height:32, startX:34, startY:0}]
 			},
 			{
 				fps:1,
 				cycle:false,
-				frames:[{width:32, height:32, startX:63, startY:0}]
+				frames:[{width:32, height:32, startX:66, startY:0}]
 			},
 			{
 				fps:1,
 				cycle:false,
-				frames:[{width:32, height:32, startX:97, startY:0}]
+				frames:[{width:32, height:32, startX:98, startY:0}]
 			},
 			{
 				fps:1,
 				cycle:false,
-				frames:[{width:32, height:32, startX:129, startY:0}]
+				frames:[{width:32, height:32, startX:130, startY:0}]
 			},
 			{
 				fps:1,
@@ -77,7 +77,7 @@ var caveData ={
 			[3,8,8,8,8,3,3,3,3,3,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8],
 			[3,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8],
 			],
-			src:`images/theatertiles.png`,
+			src:`images/theaterspritesheet.png`,
 		},
 		states:caveData.states
 		}
@@ -96,7 +96,7 @@ var caveData ={
 					
 					
 				],
-				src:`images/theatertiles.png`,
+				src:`images/theaterspritesheet.png`,
 			},
 			states:caveData.states
 			
