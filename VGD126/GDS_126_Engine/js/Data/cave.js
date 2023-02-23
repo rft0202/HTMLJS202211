@@ -2,14 +2,14 @@ var x=false;
 var caveData ={
 	info:{
 		layout:[
-			[0,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,2],
-			[2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2],
-			[2,x,x,7,x,x,7,x,x,x,x,x,x,7,7,x,7,7,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,2],
-			[6,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,2],
+			[0,x,2,3,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,2],
+			[x,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2],
+			[2,x,2,7,x,x,7,x,x,x,x,x,x,7,7,x,7,7,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,2],
+			[6,x,x,3,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,2],
 			[5,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,2],
 			[7,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,2],
 			[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,2],
-			[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x]
+			[0,1,2,3,4,5,6,7,8,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x]
 			
 			
 		],
@@ -21,48 +21,48 @@ var caveData ={
 				fps:5,
 				cycle:false,
 				frames:[
-					{width:64, height:64, startX:0, startY:0}
+					{width:32, height:32, startX:-1, startY:0}
 				]
 			},
 			{
 				fps:1,
 				cycle:false,
-				frames:[{width:64, height:64, startX:64, startY:0}]
+				frames:[{width:32, height:32, startX:31.5, startY:0}]
 			},
 			{
 				fps:1,
 				cycle:false,
-				frames:[{width:64, height:64, startX:128, startY:0}]
+				frames:[{width:32, height:32, startX:63, startY:0}]
 			},
 			{
 				fps:1,
 				cycle:false,
-				frames:[{width:64, height:64, startX:192, startY:0}]
+				frames:[{width:32, height:32, startX:97, startY:0}]
 			},
 			{
 				fps:1,
 				cycle:false,
-				frames:[{width:64, height:64, startX:256, startY:0}]
+				frames:[{width:32, height:32, startX:129, startY:0}]
 			},
 			{
 				fps:1,
 				cycle:false,
-				frames:[{width:64, height:64, startX:320, startY:0}]
+				frames:[{width:32, height:32, startX:160, startY:0}]
 			},
 			{
 				fps:1,
 				cycle:false,
-				frames:[{width:64, height:64, startX:384, startY:0}]
+				frames:[{width:32, height:32, startX:192, startY:0}]
 			},
 			{
 				fps:1,
 				cycle:false,
-				frames:[{width:64, height:64, startX:448, startY:0}]
+				frames:[{width:32, height:32, startX:224, startY:0}]
 			},
 			{
 				fps:1,
 				cycle:false,
-				frames:[{width:64, height:64, startX:512, startY:0}]
+				frames:[{width:32, height:32, startX:256, startY:0}]
 			}
 		]
 	}
