@@ -13,7 +13,7 @@ var caveData ={
 			
 			
 		],
-		src:`images/bg2.png`,
+		src:`images/theatertiles.png`,
 	},
 	states:
 	[		
@@ -77,7 +77,7 @@ var caveData ={
 			[3,8,8,8,8,3,3,3,3,3,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8],
 			[3,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8],
 			],
-			src:`images/bg2.png`,
+			src:`images/theatertiles.png`,
 		},
 		states:caveData.states
 		}
@@ -96,7 +96,7 @@ var caveData ={
 					
 					
 				],
-				src:`images/bg2.png`,
+				src:`images/theatertiles.png`,
 			},
 			states:caveData.states
 			
