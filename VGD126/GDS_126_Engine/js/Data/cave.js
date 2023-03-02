@@ -12,7 +12,7 @@ var caveData ={
 			//[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1] //8
 			
 		],
-		src:`images/theatertiles.png`,
+		src:`images/theatertiles1.png`,
 	},
 	states:
 	[		
@@ -26,17 +26,17 @@ var caveData ={
 			{ //red
 				fps:1,
 				cycle:false,
-				frames:[{width:32, height:32, startX:32, startY:0}]
+				frames:[{width:32, height:32, startX:36, startY:0}]
 			},
 			{ //gray
 				fps:1,
 				cycle:false,
-				frames:[{width:32, height:32, startX:64, startY:0}]
+				frames:[{width:32, height:32, startX:72, startY:0}]
 			},
 			{ //black2
 				fps:1,
 				cycle:false,
-				frames:[{width:32, height:32, startX:128, startY:0}]
+				frames:[{width:32, height:32, startX:108, startY:0}]
 			},
 			{
 				fps:1,
@@ -72,11 +72,11 @@ var caveData ={
 			[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x],
 			[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x],
 			[x,x,x,x,3,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x],
-			[x,x,x,3,2,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x],
-			[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x],
+			[x,x,x,x,3,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x],
+			[x,x,x,x,3,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x],
 			[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x],
 			],
-			src:`images/theatertiles.png`,
+			src:`images/theatertiles1.png`,
 		},
 		states:caveData.states
 		}
@@ -94,7 +94,7 @@ var caveData ={
 					
 					
 				],
-				src:`images/theatertiles.png`,
+				src:`images/theatertiles1.png`,
 			},
 			states:caveData.states
 			
