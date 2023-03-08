@@ -2,7 +2,7 @@
 This file contains all of the code for the Main Menu
 ----------------------------------*/
 
-var startButton = new GameObject({width:200});
+var startButton = new GameObject({width:200}); //put .makeSprite(buttonData after last yellow parentheses)
 //startButton.img.src="images/mrt.jpg"
 //startButton.width=200;
 startButton.hitBoxWidth=800

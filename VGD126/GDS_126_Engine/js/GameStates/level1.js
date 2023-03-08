@@ -11,7 +11,7 @@ wiz.force=1
 
 //The ground
 var ground = new GameObject({width:canvas.width*10, x:canvas.width*10/2,height:64,y:canvas.height-32, color:"green"})
-ground.img.src=`images/ground.png`
+ground.img.src=`images/grass.png`
 
 //A platform
 var plat = new GameObject({width:256, height:64,y:canvas.height-200, color:"green"})
@@ -28,7 +28,8 @@ var caveBack = new Grid(caveBackData, {world:level, x:1024, tileHeight:64, tileW
 //cave hitbox grid
 var caveHit = new Grid(caveHitData, {world:level, x:1024, tileHeight:64, tileWidth:64});
 
-var leftBorder = new GameObject({x:0, height:canvas.height, world:level})
+var leftBorder = new GameObject({x:0, height:canvas.height + 1000, world:level})
+//leftBorder.x = wiz.left.x - leftBorder.width/2
 
 //This is a group used for collisions
 var g1 = new Group();
@@ -71,7 +72,8 @@ rbg.img.src=`images/repeatBackground.png`
 
 //middleground
 var bg = new GameObject({x:level.x,y:level.y, width:canvas.width*4, height:canvas.height})
-bg.img.src=`images/middleground.png`
+//var bg = new GameObject({x:level.x -1000,y:level.y, width:canvas.width*4, height:canvas.height})
+bg.img.src=`images/middlegroundModified.png`
 
 /*------------------vvBULLET STUFFvv----------------------*/
 
@@ -231,16 +233,25 @@ gameStates[`level1`] = function()
 	}
 	
 	
-
+if (wiz.x < canvas.width * .1 || wiz.x > canvas.width * .5) {
+//if (level.x <= 0) {
 	//Makes the level move
 	wiz.x -= offset.x;
 	level.x -= offset.x;
 
 	//moves repeating background
-	rbg.x = level.x*.5;
+	//rbg.x = level.x*.5;
+	rbg.x += -offset.x*.5;
 
 	//moves the middleground
-	bg.x = level.x*.75;
+	//bg.x = level.x*.75;
+	bg.x += -offset.x*.75;
+	
+/*} else {
+	rbg.x = level.x*.5;
+	bg.x = level.x*.75; */
+}
+	
 
 	//moves the clouds
 	//clouds.x = level.x*.25;
@@ -270,6 +281,7 @@ gameStates[`level1`] = function()
 	rbg.drawStaticImage([0,0]);
 	rbg.drawStaticImage([-rbg.width,0]);
 	rbg.drawStaticImage([rbg.width,0]);
+	//rbg.drawStaticImage({x:0, rbg.width,0, y:0}); ????
 
 	//renders the midground
 	bg.drawStaticImage([0,0]);
@@ -295,14 +307,14 @@ gameStates[`level1`] = function()
 	//Moves, checks collision and renders projectiles.
 	for(let i=0; i<bullets.length; i++)
 	{
-		if(bullets[i].overlap(stage)) bullets[i].vy+=1;
+		if(bullets[i].overlap(stage)) bullets[i].vy+=1; // comment out for no gravity
 		bullets[i].move()
 		bullets[i].play(function(){return}).drawSprite()
-		//bullets[i].angle+=10
+		//bullets[i].angle+=10 //rotation
 		while(g1.collide(bullets[i].bottom) && bullets[i].vy>=0)
 		{
 			
-			bullets[i].vy=0;
+			bullets[i].vy=0; //comment out for no gravity
 			bullets[i].y--;
 			
 		}
