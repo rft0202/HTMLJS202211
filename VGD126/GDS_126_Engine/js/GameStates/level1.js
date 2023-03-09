@@ -6,7 +6,12 @@ var friction = {x:.85,y:.97}
 var stage = new GameObject({width:canvas.width, height:canvas.height});
 
 //Avatar
-var wiz = new GameObject({width:128, height:128, spriteData:playerData}).makeSprite(playerData)
+var wiz = new GameObject({width:78, height:128, spriteData:playerData}).makeSprite(playerData)
+/*if (player.states == ('attack')){
+	wiz.width = 101
+} else {
+	wiz.width = 78 
+} */
 wiz.force=1
 
 //Attack
@@ -321,7 +326,7 @@ if (wiz.x < canvas.width * .1 || wiz.x > canvas.width * .5) {
 
 	//renders player
 	wiz.play(function(){return}).drawSprite()
-	
+
 	//Moves, checks collision and renders projectiles.
 	for(let i=0; i<bullets.length; i++)
 	{
