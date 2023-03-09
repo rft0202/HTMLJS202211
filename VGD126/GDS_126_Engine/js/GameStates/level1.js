@@ -11,15 +11,22 @@ wiz.force=1
 
 //The ground
 var ground = new GameObject({width:canvas.width*10, x:canvas.width*10/2,height:64,y:canvas.height-32, color:"green"})
-ground.img.src=`images/grass.png`
+ground.img.src=`images/ground.png`
 
 //A platform
-var plat = new GameObject({width:256, height:64,y:canvas.height-200, color:"green"})
+//var plat = new GameObject({width:256, height:64,y:canvas.height-200, color:"green"})
+var plat = new GameObject({width:256, height:64,y:canvas.height-200})
+plat.img.src=`images/plantPlatform.png`
+
+//stem
+var stem = new GameObject({width:64, height:64,y:canvas.height-400})
+stem.src = "images/stem.png";
 
 //A level object when it is moved other objects move with it.
 var level = new GameObject({x:0,y:0});
 ground.world = level;
 plat.world = level;
+stem.world = level;
 
 //Cave foreground Tile Grid
 var cave = new Grid(caveData, {world:level, x:1024, tileHeight:64, tileWidth:64});
@@ -43,7 +50,7 @@ g1.add([ground,leftBorder, caveHit.grid])
 
 //Used to draw the rectangles
 var rects = new Group();
-rects.add([ground,plat])
+rects.add([ground])
 
 //used to render the sprites
 var sprites = new Group();
@@ -54,7 +61,7 @@ front.add([cave.grid])
 
 //list of items to be rendered in the level
 var levelItems=new Group();
-levelItems.add([caveBack.grid, ground, plat, cave.grid]);
+levelItems.add([caveBack.grid, ground, plat, stem, cave.grid,]);
 
 //Very back background
 var sky = new GameObject({width:canvas.width, height:canvas.height, color:"cyan"})
@@ -267,7 +274,10 @@ if (wiz.x < canvas.width * .1 || wiz.x > canvas.width * .5) {
 	var groundPattern = context.createPattern(ground.img, `repeat`);
 	//Applies pattern to ground and platform
 	ground.color = groundPattern
-	plat.color = groundPattern
+	
+	//plat.color = groundPattern
+	//plat.drawStaticImage([0,0]);
+	//plat.drawStaticImage();
 
 	//Sets up pattern for the sky
 	var skyPattern = context.createPattern(sky.img, `repeat`);
@@ -300,6 +310,11 @@ if (wiz.x < canvas.width * .1 || wiz.x > canvas.width * .5) {
 
 	//Renders sprites group
 	sprites.play().render(`drawSprite`);
+
+	plat.drawStaticImage([-plat.width/2, -plat.height/2 - 30]);
+
+	//fix this later
+	stem.drawStaticImage([]);
 
 	//renders player
 	wiz.play(function(){return}).drawSprite()
