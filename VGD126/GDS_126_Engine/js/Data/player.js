@@ -95,3 +95,33 @@ var playerData ={
 	}
 		
 }
+
+var attackData ={
+	info:{
+		src:`images/attackspritesheet.png`
+	},
+	states:{
+		//The idle animation 
+    	idle:
+		{
+			fps:10,
+			cycle:true,
+			frames:
+			[
+				{width:64, height:64, startX:0, startY:0},
+				{width:64, height:64, startX:64, startY:0},
+				{width:64, height:64, startX:128, startY:0},
+				{width:64, height:64, startX:192, startY:0},
+				{width:64, height:64, startX:256, startY:0},
+				{width:64, height:64, startX:320, startY:0},
+				{width:64, height:64, startX:384, startY:0},
+				{width:64, height:64, startX:320, startY:0},
+				{width:64, height:64, startX:256, startY:0},
+				{width:64, height:64, startX:192, startY:0},
+				{width:64, height:64, startX:128, startY:0},
+				{width:64, height:64, startX:64, startY:0},
+				{width:64, height:64, startX:0, startY:0},
+			]
+		}
+	}
+}

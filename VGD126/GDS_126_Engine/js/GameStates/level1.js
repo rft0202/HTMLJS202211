@@ -9,6 +9,9 @@ var stage = new GameObject({width:canvas.width, height:canvas.height});
 var wiz = new GameObject({width:128, height:128, spriteData:playerData}).makeSprite(playerData)
 wiz.force=1
 
+//Attack
+//var spark = new GameObject({width:128, height:128, spriteData:attackData}).makeSprite(attackData)
+
 //The ground
 var ground = new GameObject({width:canvas.width*10, x:canvas.width*10/2,height:64,y:canvas.height-32, color:"green"})
 ground.img.src=`images/ground.png`
@@ -94,9 +97,9 @@ for(let i=0; i<100; i++)
 {
 	bullets[i] = new GameObject({width:64, height:64})
 	//bullets[i].img.src="images/mrt.jpg"
-	bullets[i].makeSprite(playerData)
+	bullets[i].makeSprite(attackData)
 	bullets[i].y=-10000
-	bullets[i].changeState(`walk`)
+	//bullets[i].changeState(`walk`)
 }
 
 //console.log(bullets)
@@ -170,7 +173,7 @@ gameStates[`level1`] = function()
 			bullets[currentBullet].vx = 5*wiz.dir;
 			bullets[currentBullet].world = level;
 			bullets[currentBullet].x = wiz.x-level.x + (wiz.dir * 96) ;
-			bullets[currentBullet].y = wiz.y + 20;
+			bullets[currentBullet].y = wiz.y - 20;
 			bullets[currentBullet].dir = wiz.dir;
 			
 			//sounds.play(`splode`,1)
@@ -322,14 +325,14 @@ if (wiz.x < canvas.width * .1 || wiz.x > canvas.width * .5) {
 	//Moves, checks collision and renders projectiles.
 	for(let i=0; i<bullets.length; i++)
 	{
-		if(bullets[i].overlap(stage)) bullets[i].vy+=1; // comment out for no gravity
+		//if(bullets[i].overlap(stage)) bullets[i].vy+=1; // comment out for no gravity
 		bullets[i].move()
 		bullets[i].play(function(){return}).drawSprite()
-		//bullets[i].angle+=10 //rotation
+		bullets[i].angle+=10 //rotation
 		while(g1.collide(bullets[i].bottom) && bullets[i].vy>=0)
 		{
 			
-			bullets[i].vy=0; //comment out for no gravity
+			//bullets[i].vy=0; //comment out for no gravity
 			bullets[i].y--;
 			
 		}
