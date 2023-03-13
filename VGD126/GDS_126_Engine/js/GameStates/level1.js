@@ -37,11 +37,11 @@ plat.world = level;
 stem.world = level;
 
 //Cave foreground Tile Grid
-var cave = new Grid(caveData, {world:level, x:1024, tileHeight:64, tileWidth:64});
+var cave = new Grid(caveData, {world:level, x:1024, tileHeight:32, tileWidth:32});
 //Cave background Tile Grid
-var caveBack = new Grid(caveBackData, {world:level, x:1024, tileHeight:64, tileWidth:64});
+var caveBack = new Grid(caveBackData, {world:level, x:1024, tileHeight:32, tileWidth:32});
 //cave hitbox grid
-var caveHit = new Grid(caveHitData, {world:level, x:1024, tileHeight:64, tileWidth:64});
+var caveHit = new Grid(caveHitData, {world:level, x:1024, tileHeight:32, tileWidth:32});
 
 var leftBorder = new GameObject({x:0, height:canvas.height + 1000, world:level})
 //leftBorder.x = wiz.left.x - leftBorder.width/2
