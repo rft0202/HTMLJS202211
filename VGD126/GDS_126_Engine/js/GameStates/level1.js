@@ -27,14 +27,17 @@ var plat = new GameObject({width:256, height:64,y:canvas.height-200})
 plat.img.src=`images/plantPlatform.png`
 
 //stem
-var stem = new GameObject({width:64, height:64,y:canvas.height-400})
-stem.src = "images/stem.png";
+var stem1 = new GameObject({width:64, height:64})
+stem1.img.src = `images/stem.png`
+var stem2 = new GameObject({width:64, height:64})
+stem2.img.src = `images/stem.png`
 
 //A level object when it is moved other objects move with it.
 var level = new GameObject({x:0,y:0});
 ground.world = level;
 plat.world = level;
-stem.world = level;
+stem1.world = level;
+stem2.world = level;
 
 //Cave foreground Tile Grid
 var cave = new Grid(caveData, {world:level, x:1024, tileHeight:32, tileWidth:32});
@@ -69,7 +72,7 @@ front.add([cave.grid])
 
 //list of items to be rendered in the level
 var levelItems=new Group();
-levelItems.add([caveBack.grid, ground, plat, stem, cave.grid,]);
+levelItems.add([caveBack.grid, ground, plat, stem1, stem2, cave.grid,]);
 
 //Very back background
 var sky = new GameObject({width:canvas.width, height:canvas.height, color:"cyan"})
@@ -321,8 +324,8 @@ if (wiz.x < canvas.width * .1 || wiz.x > canvas.width * .5) {
 
 	plat.drawStaticImage([-plat.width/2, -plat.height/2 - 30]);
 
-	//fix this later
-	stem.drawStaticImage([]);
+	stem1.drawStaticImage([-32, 58]);
+	stem2.drawStaticImage([-32, 116]);
 
 	//renders player
 	wiz.play(function(){return}).drawSprite()
