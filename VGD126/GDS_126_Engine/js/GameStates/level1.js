@@ -23,6 +23,14 @@ wiz.force=1
 var ground = new GameObject({width:canvas.width*10, x:canvas.width*10/2,height:64,y:canvas.height-32, color:"green"})
 ground.img.src=`images/ground.png`
 
+//step
+var step = new GameObject({width:32, x:1040,height:32,y:428,color:"red"})
+step.img.src=`images/floor.png`
+
+//floor
+var floor = new GameObject({width:992, x:1552,height:32,y:395,color:"red"})
+floor.img.src=`images/floor.png`
+
 //A platform
 //var plat = new GameObject({width:256, height:64,y:canvas.height-200, color:"green"})
 var plat = new GameObject({width:256, height:64,y:canvas.height-200})
@@ -37,6 +45,8 @@ stem2.img.src = `images/stem.png`
 //A level object when it is moved other objects move with it.
 var level = new GameObject({x:0,y:0});
 ground.world = level;
+step.world = level;
+floor.world = level;
 plat.world = level;
 stem1.world = level;
 stem2.world = level;
@@ -56,14 +66,14 @@ var g1 = new Group();
 g1.color= `rgb(251,0,254)`;
 
 //Adds items to a group
-g1.add([ground,leftBorder, caveHit.grid])
+g1.add([ground, leftBorder, caveHit.grid])
 
 //removes items from a group
 //g1.remove([plat, cave.grid])
 
 //Used to draw the rectangles
 var rects = new Group();
-rects.add([ground])
+rects.add([ground, step, floor])
 
 //used to render the sprites
 var sprites = new Group();
@@ -74,7 +84,7 @@ front.add([cave.grid])
 
 //list of items to be rendered in the level
 var levelItems=new Group();
-levelItems.add([caveBack.grid, ground, plat, stem1, stem2, cave.grid,]);
+levelItems.add([caveBack.grid, ground, step, floor, plat, stem1, stem2, cave.grid,]);
 
 //Very back background
 var sky = new GameObject({width:canvas.width, height:canvas.height, color:"cyan"})
@@ -287,7 +297,15 @@ if (wiz.x < canvas.width * .1 || wiz.x > canvas.width * .5) {
 	var groundPattern = context.createPattern(ground.img, `repeat`);
 	//Applies pattern to ground and platform
 	ground.color = groundPattern
+
+	//step pattern
+	var stepPattern = context.createPattern(floor.img, `repeat`);
+	step.color = stepPattern
 	
+	//floor pattern
+	var floorPattern = context.createPattern(floor.img, `repeat`);
+	floor.color = floorPattern
+
 	//plat.color = groundPattern
 	//plat.drawStaticImage([0,0]);
 	//plat.drawStaticImage();
