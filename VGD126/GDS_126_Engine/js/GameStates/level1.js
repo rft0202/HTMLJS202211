@@ -1,5 +1,6 @@
 
 /*------------Use this if you want to implement States---------------*/
+
 var gravity = 1;
 var friction = {x:.85,y:.97}
 
@@ -7,11 +8,12 @@ var stage = new GameObject({width:canvas.width, height:canvas.height});
 
 //Avatar
 var wiz = new GameObject({width:78, height:128, spriteData:playerData}).makeSprite(playerData)
-/*if (player.states == ('attack')){
+if (wiz.currentState == 'attack'){
 	wiz.width = 101
 } else {
-	wiz.width = 78 
-} */
+	wiz.width = 78
+}
+//doesn't work
 wiz.force=1
 
 //Attack
@@ -158,7 +160,7 @@ gameStates[`level1`] = function()
 		wiz.canJump = false;
 		wiz.vy = wiz.jumpHeight;
 		wiz.changeState(`jump`)
-		//sounds.play(`splode`,1)
+		sounds.play(`jump`, 0);
 	}
 	shotTimer--;
 	if(shotTimer <=0)
@@ -184,7 +186,7 @@ gameStates[`level1`] = function()
 			bullets[currentBullet].y = wiz.y - 20;
 			bullets[currentBullet].dir = wiz.dir;
 			
-			//sounds.play(`splode`,1)
+			sounds.play(`shoot`, 0);
 
 			currentBullet++;
 			if(currentBullet>=bullets.length)
