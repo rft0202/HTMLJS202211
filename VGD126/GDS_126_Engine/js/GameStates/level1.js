@@ -20,15 +20,15 @@ wiz.force=1
 //var spark = new GameObject({width:128, height:128, spriteData:attackData}).makeSprite(attackData)
 
 //The ground
-var ground = new GameObject({width:canvas.width*10, x:canvas.width*10/2,height:64,y:canvas.height-32, color:"green"})
+var ground = new GameObject({width:canvas.width*10, x:canvas.width*10/2 -50,height:64,y:canvas.height-32, color:"green"})
 ground.img.src=`images/ground.png`
 
 //step
-var step = new GameObject({width:32, x:1040,height:32,y:428,color:"red"})
+var step = new GameObject({width:32, x:1040,height:32,y:427,color:"red"})
 step.img.src=`images/floor.png`
 
 //floor
-var floor = new GameObject({width:992, x:1552,height:32,y:395,color:"red"})
+var floor = new GameObject({width:992, x:1551,height:32,y:395,color:"red"})
 floor.img.src=`images/floor.png`
 
 //A platform
@@ -101,7 +101,7 @@ var rbg = new GameObject({x:level.x, y:level.y, width:1024, height:512})
 rbg.img.src=`images/repeatBackground.png`
 
 //middleground
-var bg = new GameObject({x:level.x,y:level.y, width:canvas.width*4, height:canvas.height})
+var bg = new GameObject({x:level.x -50,y:level.y, width:canvas.width*4, height:canvas.height})
 //var bg = new GameObject({x:level.x -1000,y:level.y, width:canvas.width*4, height:canvas.height})
 bg.img.src=`images/middlegroundModified.png`
 

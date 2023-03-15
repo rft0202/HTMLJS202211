@@ -1,3 +1,13 @@
+html,body{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+body{
+	background-image: url(../images/rainbowBackground.png);
+	background-repeat: no-repeat;
+	background-size: cover;
+}
 canvas{
 	border:1px solid black;
 }
