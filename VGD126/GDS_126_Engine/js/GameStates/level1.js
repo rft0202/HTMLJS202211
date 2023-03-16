@@ -8,11 +8,11 @@ var stage = new GameObject({width:canvas.width, height:canvas.height});
 
 //Avatar
 var wiz = new GameObject({width:78, height:128, spriteData:playerData}).makeSprite(playerData)
-if (wiz.currentState == 'attack'){
+/*if (wiz.currentState == 'attack'){
 	wiz.width = 101
 } else {
 	wiz.width = 78
-}
+}*/
 //doesn't work
 wiz.force=1
 
@@ -186,6 +186,7 @@ gameStates[`level1`] = function()
 	{
 		if(canShoot)
 		{
+			wiz.width = 100
 			wiz.changeState(`attack`)
 			shotTimer = shotDelay
 			//console.log(`Boom`)
@@ -204,10 +205,34 @@ gameStates[`level1`] = function()
 				currentBullet=0
 			}
 
+			if(keys[`D`]  )
+			{
+				wiz.width = 78;
+				wiz.dir=1;
+				if(wiz.currentState != `crouch`) 
+				{
+					if(wiz.canJump)wiz.changeState(`walk`)
+					wiz.vx += wiz.force
+				
+				}
+			
+			}
+			if(keys[`A`] )
+			{
+				wiz.width = 78;
+				wiz.dir=-1;
+				if(wiz.currentState != `crouch` ) 
+				{
+					if(wiz.canJump)wiz.changeState(`walk`)
+					wiz.vx += -wiz.force
+				}
+			
+			}
 		}
 	}
 	else
 	{
+		wiz.width = 78
 		shotTimer=0
 	}
 	
