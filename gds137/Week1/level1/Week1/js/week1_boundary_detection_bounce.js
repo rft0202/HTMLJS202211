@@ -2,7 +2,6 @@
 
 var canvas;
 var context;
-var timer;
 var interval = 1000/60;
 var ball;
 
@@ -15,7 +14,7 @@ var ball;
 	ball.vy = 0;
 	//----------------------------------------------------
 	
-	timer = setInterval(animate, interval);
+	var maintimer = setInterval(animate, interval);
 
 
 function animate()

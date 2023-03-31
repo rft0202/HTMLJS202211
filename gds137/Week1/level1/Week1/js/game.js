@@ -2,7 +2,6 @@
 
 var canvas;
 var context;
-var timer;
 //v 1000 ms or 1 second / FPS
 var interval = 1000/60;
 
@@ -15,7 +14,7 @@ var interval = 1000/60;
 	ball.vx = -2;
 	
 	//Set the Animation Timer
-	timer = setInterval(animate, interval);
+	var maintimer = setInterval(animate, interval);
 
 function animate()
 {
