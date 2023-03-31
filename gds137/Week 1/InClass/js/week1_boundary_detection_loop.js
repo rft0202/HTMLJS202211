@@ -4,15 +4,15 @@ var canvas;
 var context;
 var timer;
 var interval = 1000/60;
-var player;
+var ball;
 
 	canvas = document.getElementById("canvas");
 	context = canvas.getContext("2d");	
-	player = new Player();
+	ball = new Ball();
 	
-	//------Declare the Player's speed on the x and y axis------
-	player.vx = 2;
-	player.vy = 0;
+	//------Declare the Ball's speed on the x and y axis------
+	ball.vx = 2;
+	ball.vy = 0;
 	//----------------------------------------------------
 	
 	timer = setInterval(animate, interval);
@@ -21,14 +21,14 @@ var player;
 function animate()
 {
 	context.clearRect(0,0,canvas.width, canvas.height);	
-	player.move();
+	ball.move();
 	
 	//--------------Loop the Screen----------------------
-	if(player.x > canvas.width + player.width/2)
+	if(ball.x > canvas.width + ball.width/2)
 	{
-		player.x = -player.width/2	
+		ball.x = -ball.width/2	
 	}
 	//---------------------------------------------------
 	
-	player.draw();
+	ball.draw();
 }
