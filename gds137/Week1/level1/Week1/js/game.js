@@ -11,7 +11,8 @@ var interval = 1000/60;
 	
 	//Instantiate the Ball
 	var ball = new Ball();
-	ball.vx = -2;
+	ball.vx = -5;
+	ball.vy = -5;
 	
 	//Set the Animation Timer
 	var maintimer = setInterval(animate, interval);
@@ -34,6 +35,17 @@ function animate()
 	{
 		ball.x = canvas.width - ball.width/2;
 		ball.vx = -ball.vx;
+	}
+
+	if(ball.y < ball.height/2)
+	{
+		ball.y = ball.height/2;
+		ball.vy = -ball.vy;
+	}
+	if(ball.y > canvas.height - ball.height/2)
+	{
+		ball.y = canvas.height - ball.height/2;
+		ball.vy = -ball.vy;
 	}
 
 	//Update the Screen (redraw the elements)

@@ -11,7 +11,7 @@ var ball;
 	
 	//------Declare the Ball's speed on the x and y axis------
 	ball.vx = 2;
-	ball.vy = 0;
+	ball.vy = 2;
 	//----------------------------------------------------
 	
 	var maintimer = setInterval(animate, interval);
