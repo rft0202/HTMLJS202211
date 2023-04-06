@@ -13,10 +13,10 @@ var player1;
 	
 	//Instantiate the Player
 	player1 = new GameObject();
-	player1.x = player1.width/2;
+	player1.x = 0;
 	player1.y = canvas.height/2;
 	player1.width = 20;
-	player1.height = 100; 
+	player1.height = 125; 
 
 	//Set the Animation Timer
 	timer = setInterval(animate, interval);
@@ -26,19 +26,19 @@ function animate()
 	//Erase the Screen
 	context.clearRect(0,0,canvas.width, canvas.height);	
 	
-	
+
 	//Move the Player to the right
-	/*if(d)
+	if(w)
 	{
-		console.log("Moving Right");
-		player1.x += 2;
+		console.log("Moving Up");
+		player1.y += -2;
 	}
-	if(a)
+	if(s)
 	{
-		console.log("Moving Left");
-		player1.x += -2;
+		console.log("Moving Down");
+		player1.y += 2;
 	}
-	*/
+	
 	
 	//Update the Screen
 	player1.drawRect();
