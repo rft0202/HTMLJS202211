@@ -3,6 +3,13 @@ var a = false;
 var d = false;
 
 //Add Event Listeners
+/* //advanced controls
+document.addEventListener("keydown", function(e){
+	keys[String.fromCharCode(e.keyCode)]=true;
+	console.log(keys);
+}); 
+document.addEventListener("keyup", function(e){keys=[]}); 
+*/
 document.addEventListener("keydown", press);
 document.addEventListener("keyup", release);
 

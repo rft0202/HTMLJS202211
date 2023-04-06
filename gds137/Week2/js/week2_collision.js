@@ -8,7 +8,7 @@ var interval = 1000/60;
 var player;
 
 //This is used to stop the player from moving through obstacles.
-var prevX;
+var prevX; //previous X coordinate
 
 	//Set Up the Canvas
 	canvas = document.getElementById("canvas");
@@ -16,7 +16,7 @@ var prevX;
 	
 	//Instantiate the Player
 	player = new GameObject();
-	player.x = 100;
+	player.x = 100; //modify x, y, etc. here
 	
 	lBlock1 = new GameObject(canvas.width - 750, canvas.height/2+75, 100, 100,"#00ff00");
 	lBlock2 = new GameObject(canvas.width - 550, canvas.height/2+75, 100, 100,"#00ff00");
@@ -76,7 +76,8 @@ function animate()
 	//Impede movement
 	if(rBlock2.hitTestObject(player))
 	{
-		player.x = prevX;
+		//player.x = prevX;
+		player.x = rBlock2.x - rBlock2.width/2 - player.width/2;
 		console.log("colliding");
 	}
 	else
