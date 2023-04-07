@@ -38,22 +38,17 @@ function animate()
 		console.log("Moving Down");
 		player1.y += 2;
 	}
-	/*
-	//Screen Collision
-	if(player1.y > canvas.height/2)
-	{
-		player1.y = canvas.y - canvas.width/2 + player1.height/2;
-	}
-	else if (player1.y < canvas.height/2)
-	{
-		player1.y = canvas.y - canvas.width/2 - player1.height/2;
-	}
 	
+	//Screen Collision
+	if(player1.y < player1.height/2)
+	{
+		player1.y = player1.height/2;
+	}
 	if(player1.y > canvas.height - player1.height/2)
 	{
 		player1.y = canvas.height - player1.height/2;
+	}
 
-		*/
 
 	//Update the Screen
 	player1.drawRect();
