@@ -62,6 +62,59 @@ function animate()
 	{
 		ball.x = player1.x + player1.width/2 + ball.width/2;
 		if(ball.vx > 0 && ball.vx < 20){
+			ball.vx = -ball.vx //- 1; //from right to left
+		}
+		else if (ball.vx < 0 && ball.vx > -20){
+			ball.vx = -ball.vx //+ 1;
+		}
+		else{
+			ball.vx = -ball.vx;
+		}
+
+     	//ball hits top
+    	if(ball.y < player1.y - player1.height/6)
+     	{
+			
+			if(ball.vy > 0 && ball.vy < 20){
+				ball.vy = -5 //- 1; //from up to down
+			}
+			else if (ball.vx < 0 && ball.vx > -20){
+				ball.vy = 5 //+ 1; //from down to up
+			}
+			else{
+				ball.vy = -5;
+			}
+    	}
+		/*
+		//ball hits middle
+		if(ball.y > player1.y - player1.height )
+		{
+			if(ball.vy > 0 && ball.vy < 20){
+				ball.vy = -ball.vy //- 1;
+			}
+			else if (ball.vx < 0 && ball.vx > -20){
+				ball.vy = -ball.vy //+ 1;
+			}
+			else{
+				ball.vy = -ball.vy;
+			}
+		}
+		*/
+		//ball hits bottom
+		if(ball.y > player1.y + player1.height/6)
+     	{
+			if(ball.vy > 0 && ball.vy < 20){
+				ball.vy = 5 //- 1;
+			}
+			else if (ball.vx < 0 && ball.vx > -20){
+				ball.vy = 5 //+ 1;
+			}
+			else{
+				ball.vy = 5;
+			}
+    	}
+		
+		/*if(ball.vx > 0 && ball.vx < 20){
 			ball.vx = -ball.vx - 1;
 		}
 		else if (ball.vx < 0 && ball.vx > -20){
@@ -79,17 +132,20 @@ function animate()
 		else{
 			ball.vy = -ball.vy;
 		}
+		*/
 	}
 
 	//Ball Wall Collision
 	if(ball.x < ball.width/2 || ball.x > canvas.width - ball.width/2)
 	{
 		ball.x = canvas.width/2;
+		ball.y = canvas.height/2;
 		ball.vx = -5;
 		ball.vy = 0;
 	}
 	if(ball.y < ball.height/2 || ball.y > canvas.height - ball.height/2)
 	{
+		ball.x = canvas.width/2;
 		ball.y = canvas.height/2;
 		ball.vx = -5;
 		ball.vy = 0;
