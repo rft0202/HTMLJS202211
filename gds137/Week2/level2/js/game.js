@@ -82,58 +82,17 @@ function animate()
 	}
 
 	//Ball Wall Collision
-	if(ball.x < ball.width/2)
+	if(ball.x < ball.width/2 || ball.x > canvas.width - ball.width/2)
 	{
-		ball.x = ball.width/2;
-		if(ball.vx > 0 && ball.vx < 20){
-			ball.vx = -ball.vx - 1;
-		}
-		else if (ball.vx < 0 && ball.vx > -20){
-			ball.vx = -ball.vx + 1;
-		}
-		else{
-			ball.vx = -ball.vx; //stops the ball from going too fast
-		}
+		ball.x = canvas.width/2;
+		ball.vx = -5;
+		ball.vy = 0;
 	}
-	if(ball.x > canvas.width - ball.width/2)
+	if(ball.y < ball.height/2 || ball.y > canvas.height - ball.height/2)
 	{
-		ball.x = canvas.width - ball.width/2;
-		if(ball.vx > 0 && ball.vx < 20){
-			ball.vx = -ball.vx - 1;
-		}
-		else if (ball.vx < 0 && ball.vx > -20){
-			ball.vx = -ball.vx + 1;
-		}
-		else{
-			ball.vx = -ball.vx; 
-		}
-	}
-
-	if(ball.y < ball.height/2)
-	{
-		ball.y = ball.height/2;
-		if(ball.vy > 0 && ball.vy < 20){
-			ball.vy = -ball.vy - 1;
-		}
-		else if (ball.vx < 0 && ball.vx > -20){
-			ball.vy = -ball.vy + 1;
-		}
-		else{
-			ball.vy = -ball.vy;
-		}
-	}
-	if(ball.y > canvas.height - ball.height/2)
-	{
-		ball.y = canvas.height - ball.height/2;
-		if(ball.vy > 0 && ball.vy < 20){
-			ball.vy = -ball.vy - 1;
-		}
-		else if (ball.vx < 0 && ball.vx > -20){
-			ball.vy = -ball.vy + 1;
-		}
-		else{
-			ball.vy = -ball.vy;
-		}
+		ball.y = canvas.height/2;
+		ball.vx = -5;
+		ball.vy = 0;
 	}
 
 	//Update the Screen
