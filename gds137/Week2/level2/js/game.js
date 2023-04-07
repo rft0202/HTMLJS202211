@@ -18,6 +18,12 @@ var player1;
 	player1.width = 20;
 	player1.height = 125; 
 
+	//Instantiate the Ball
+	var ball = new GameObject();
+	ball.color = 'red';
+	ball.vx = -5;
+	ball.vy = -5;
+
 	//Set the Animation Timer
 	timer = setInterval(animate, interval);
 
@@ -26,6 +32,7 @@ function animate()
 	//Erase the Screen
 	context.clearRect(0,0,canvas.width, canvas.height);	
 	
+	ball.move();
 
 	//Move the Player to the right
 	if(w)
@@ -39,7 +46,7 @@ function animate()
 		player1.y += 2;
 	}
 	
-	//Screen Collision
+	//Player Wall Collision
 	if(player1.y < player1.height/2)
 	{
 		player1.y = player1.height/2;
@@ -49,7 +56,78 @@ function animate()
 		player1.y = canvas.height - player1.height/2;
 	}
 
+	//Ball Paddle Collision
+	/*if (ball.x < player1.x && ball.y < player1.y + player1.height/6)
+	{
+		//ball.x = ball.width/2;
+		if(ball.vx > 0 && ball.vx < 20){
+			ball.vx = -ball.vx - 1;
+		}
+		else if (ball.vx < 0 && ball.vx > -20){
+			ball.vx = -ball.vx + 1;
+		}
+		else{
+			ball.vx = -ball.vx;
+		}
+	}
+	*/
+
+	//Ball Wall Collision
+	if(ball.x < ball.width/2)
+	{
+		ball.x = ball.width/2;
+		if(ball.vx > 0 && ball.vx < 20){
+			ball.vx = -ball.vx - 1;
+		}
+		else if (ball.vx < 0 && ball.vx > -20){
+			ball.vx = -ball.vx + 1;
+		}
+		else{
+			ball.vx = -ball.vx; //stops the ball from going too fast
+		}
+	}
+	if(ball.x > canvas.width - ball.width/2)
+	{
+		ball.x = canvas.width - ball.width/2;
+		if(ball.vx > 0 && ball.vx < 20){
+			ball.vx = -ball.vx - 1;
+		}
+		else if (ball.vx < 0 && ball.vx > -20){
+			ball.vx = -ball.vx + 1;
+		}
+		else{
+			ball.vx = -ball.vx; 
+		}
+	}
+
+	if(ball.y < ball.height/2)
+	{
+		ball.y = ball.height/2;
+		if(ball.vy > 0 && ball.vy < 20){
+			ball.vy = -ball.vy - 1;
+		}
+		else if (ball.vx < 0 && ball.vx > -20){
+			ball.vy = -ball.vy + 1;
+		}
+		else{
+			ball.vy = -ball.vy;
+		}
+	}
+	if(ball.y > canvas.height - ball.height/2)
+	{
+		ball.y = canvas.height - ball.height/2;
+		if(ball.vy > 0 && ball.vy < 20){
+			ball.vy = -ball.vy - 1;
+		}
+		else if (ball.vx < 0 && ball.vx > -20){
+			ball.vy = -ball.vy + 1;
+		}
+		else{
+			ball.vy = -ball.vy;
+		}
+	}
 
 	//Update the Screen
 	player1.drawRect();
+	ball.drawCircle();
 }
