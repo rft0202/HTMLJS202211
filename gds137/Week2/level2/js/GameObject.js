@@ -15,7 +15,7 @@ function GameObject()
 	
 	//object's color
 	this.color = "#502a7f";
-	
+
 	//This draws the object to the screen
 	this.drawCircle = function()
 	{
@@ -49,5 +49,42 @@ function GameObject()
 	{
 		this.x += this.vx;
 		this.y += this.vy;
+	}
+
+	//This changes the player's position
+	this.move = function()
+	{
+		this.x += this.vx;
+		this.y += this.vy;
+	}
+	
+	this.left = function() 
+	{
+		return this.x - this.width/2;
+	}
+	this.right = function() 
+	{
+		return this.x + this.width/2;
+	}
+	
+	this.top = function() 
+	{
+		return this.y - this.height/2;
+	}
+	this.bottom = function() 
+	{
+		return this.y + this.height/2;
+	}
+	
+	this.hitTestObject = function(obj)
+	{
+		if(this.left() < obj.right() && 
+		   this.right() > obj.left() &&
+		   this.top() < obj.bottom() &&
+		   this.bottom() > obj.top())
+		{
+			return true //ends function
+		}
+		return false;
 	}
 }

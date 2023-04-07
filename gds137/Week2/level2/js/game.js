@@ -20,9 +20,10 @@ var player1;
 
 	//Instantiate the Ball
 	var ball = new GameObject();
-	ball.color = 'red';
+	ball.color = 'blue';
+	ball.width = 35;
 	ball.vx = -5;
-	ball.vy = -5;
+	ball.vy = 0;
 
 	//Set the Animation Timer
 	timer = setInterval(animate, interval);
@@ -57,9 +58,9 @@ function animate()
 	}
 
 	//Ball Paddle Collision
-	/*if (ball.x < player1.x && ball.y < player1.y + player1.height/6)
+	if(player1.hitTestObject(ball))
 	{
-		//ball.x = ball.width/2;
+		ball.x = player1.x + player1.width/2 + ball.width/2;
 		if(ball.vx > 0 && ball.vx < 20){
 			ball.vx = -ball.vx - 1;
 		}
@@ -69,8 +70,16 @@ function animate()
 		else{
 			ball.vx = -ball.vx;
 		}
+		if(ball.vy > 0 && ball.vy < 20){
+			ball.vy = -ball.vy - 1;
+		}
+		else if (ball.vx < 0 && ball.vx > -20){
+			ball.vy = -ball.vy + 1;
+		}
+		else{
+			ball.vy = -ball.vy;
+		}
 	}
-	*/
 
 	//Ball Wall Collision
 	if(ball.x < ball.width/2)
