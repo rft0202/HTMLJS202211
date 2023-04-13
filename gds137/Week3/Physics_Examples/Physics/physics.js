@@ -7,7 +7,7 @@ var interval = 1000/60;
 var player;
 
 //---------------Set Friction and Gravity-----------------
-var frictionX = .85;	
+var frictionX = .85;		
 var frictionY = .97;
 var gravity = 1;
 //--------------------------------------------------------
@@ -49,7 +49,7 @@ function showAcceleration()
 	//--------------Use Velocity and Acceleration to move around----------------------
 	if(d)
 	{	
-		player.vx +=  player.ax * player.force;
+		player.vx +=  player.ax * player.force; 
 	}
 	if(a)
 	{
@@ -63,9 +63,11 @@ function showAcceleration()
 	{
 		player.vy += player.ay * player.force;
 	}
+	//^function shouldn't do movement, just acceleration
 	//---------------------------------------------------------------------------------------
 	player.x += player.vx;
 	player.y += player.vy;
+
 }
 
 function showFriction()
