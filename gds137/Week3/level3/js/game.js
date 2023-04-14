@@ -8,6 +8,9 @@ var interval = 1000/60;
 var player1;
 var player2;
 
+var p1Wins = 0;
+var p2Wins = 0;
+
 	//Set Up the Canvas
 	canvas = document.getElementById("canvas");
 	context = canvas.getContext("2d");	
@@ -42,6 +45,12 @@ function animate()
 	//Erase the Screen
 	context.clearRect(0,0,canvas.width, canvas.height);	
 	
+	//Win Counter
+	context.font = "20px Courier New";
+	context.textAlign = 'center';
+	context.fillText("Player 1 | Player 2", canvas.width/2, 20);
+	context.fillText(`${p1Wins}-${p2Wins}`, canvas.width/2, 45);
+
 	ball.move();
 
 	//Move Player 1 (left)
@@ -215,12 +224,21 @@ function animate()
 	}
 
 	//Ball Wall Collision
-	if(ball.x < ball.width/2 || ball.x > canvas.width - ball.width/2)
+	if(ball.x < ball.width/2)
 	{
 		ball.x = canvas.width/2;
 		ball.y = canvas.height/2;
 		ball.vx = -5;
 		ball.vy = 0;
+		p2Wins++;
+	}
+	if(ball.x > canvas.width - ball.width/2)
+	{
+		ball.x = canvas.width/2;
+		ball.y = canvas.height/2;
+		ball.vx = -5;
+		ball.vy = 0;
+		p1Wins++;
 	}
 	if(ball.y < ball.height/4)
 	{
