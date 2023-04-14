@@ -74,6 +74,31 @@ function animate()
 		player2.y += 2;
 	}
 	
+	/* FOR OWN GAME
+	//Player 2 AI - Hit the Ball
+	var dx = ball.x - player2.x; //how many pixels apart y
+	var dy = ball.y - player2.y; //how many pixels apart x
+	var rad = Math.atan2(dy,dx); //angle of triangle
+	player2.vy += Math.sin(rad)*1; //force
+	player2.vy *= .97; //friction
+	var dist = Math.sqrt(dx*dx + dy*dy) //hypotenuse
+	if (dist < 200)
+	{
+		player2.move();
+	}
+	//Player 2 AI - Run away from the Ball
+	var dx = ball.x - player2.x; //how many pixels apart y
+	var dy = ball.y - player2.y; //how many pixels apart x
+	var rad = Math.atan2(dy,dx); //angle of triangle
+	player2.vy += Math.sin(rad)*-1; //force //negative 1 makes it run away
+	player2.vy *= .97; //friction
+	var dist = Math.sqrt(dx*dx + dy*dy) //hypotenuse
+	if (dist < 200)
+	{
+		player2.move();
+	}
+	*/
+
 	//Player 1 Wall Collision
 	if(player1.y < player1.height/2)
 	{
@@ -98,11 +123,8 @@ function animate()
 	if(player1.hitTestObject(ball))
 	{
 		ball.x = player1.x + player1.width/2 + ball.width/2;
-		if(ball.vx > 0 && ball.vx < 20){
-			ball.vx = -ball.vx //- 1; //from right to left
-		}
-		else if (ball.vx < 0 && ball.vx > -20){
-			ball.vx = -ball.vx //+ 1;
+		if (ball.vx < 0 && ball.vx > -20){
+			ball.vx = -ball.vx + 1; //from left to right
 		}
 		else{
 			ball.vx = -ball.vx;
@@ -162,10 +184,7 @@ function animate()
 	{
 		ball.x = player2.x - player2.width/2 - ball.width/2;
 		if(ball.vx > 0 && ball.vx < 20){
-			ball.vx = -ball.vx //- 1; //from right to left
-		}
-		else if (ball.vx < 0 && ball.vx > -20){
-			ball.vx = -ball.vx //+ 1;
+			ball.vx = -ball.vx - 1; //from right to left
 		}
 		else{
 			ball.vx = -ball.vx;
