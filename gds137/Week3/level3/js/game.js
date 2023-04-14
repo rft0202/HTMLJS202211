@@ -54,24 +54,24 @@ function animate()
 	if(w)
 	{
 		console.log("Moving Up");
-		player1.y += -2;
+		player1.y += -3;
 	}
 	if(s)
 	{
 		console.log("Moving Down");
-		player1.y += 2;
+		player1.y += 3;
 	}
 
 	//Move Player 2 (right)
 	if(up)
 	{
 		console.log("Moving Up");
-		player2.y += -2;
+		player2.y += -3;
 	}
 	if(down)
 	{
 		console.log("Moving Down");
-		player2.y += 2;
+		player2.y += 3;
 	}
 	
 	/* FOR OWN GAME
