@@ -74,7 +74,7 @@ function animate()
 		player2.y += 3;
 	}
 	
-	/* FOR OWN GAME
+	/* //FOR OWN GAME
 	//Player 2 AI - Hit the Ball
 	var dx = ball.x - player2.x; //how many pixels apart y
 	var dy = ball.y - player2.y; //how many pixels apart x
