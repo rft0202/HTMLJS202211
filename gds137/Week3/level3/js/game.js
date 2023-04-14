@@ -21,6 +21,7 @@ var p2Wins = 0;
 	player1.y = canvas.height/2;
 	player1.width = 20;
 	player1.height = 125; 
+	player1.color = 'mediumslateblue';
 
 	//Instantiate Player 2
 	player2 = new GameObject();
@@ -28,7 +29,7 @@ var p2Wins = 0;
 	player2.y = canvas.height/2;
 	player2.width = 20;
 	player2.height = 125; 
-	player2.color = 'green';
+	player2.color = 'lightseagreen';
 
 	//Instantiate the Ball
 	var ball = new GameObject();
@@ -45,6 +46,17 @@ function animate()
 	//Erase the Screen
 	context.clearRect(0,0,canvas.width, canvas.height);	
 	
+	//Net
+	context.save();
+	context.strokeStyle = 'thistle';
+	context.beginPath();
+	context.moveTo(canvas.width/2, 0);
+	context.lineTo(canvas.width/2, canvas.height);
+	context.closePath();
+	context.lineWidth = 5;
+	context.stroke();
+	context.restore();
+
 	//Win Counter
 	context.font = "20px Courier New";
 	context.textAlign = 'center';
@@ -271,4 +283,5 @@ function animate()
 	player1.drawRect();
 	player2.drawRect();
 	ball.drawCircle();
+	
 }
