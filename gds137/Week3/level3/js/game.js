@@ -86,6 +86,8 @@ function animate()
 	{
 		player2.move();
 	}
+	*/
+	/*
 	//Player 2 AI - Run away from the Ball
 	var dx = ball.x - player2.x; //how many pixels apart y
 	var dy = ball.y - player2.y; //how many pixels apart x
@@ -133,29 +135,12 @@ function animate()
      	//ball hits top
     	if(ball.y < player1.y - player1.height/6)
      	{
-			
-			if(ball.vy > 0 && ball.vy < 20){
-				ball.vy = -5 //- 1; //from up to down
-			}
-			else if (ball.vx < 0 && ball.vx > -20){
-				ball.vy = -5 //+ 1; //from down to up
-			}
-			else{
-				ball.vy = -5;
-			}
+			ball.vy = -5;
     	}
 		//ball hits bottom
 		if(ball.y > player1.y + player1.height/6)
      	{
-			if(ball.vy > 0 && ball.vy < 20){
-				ball.vy = 5 //- 1;
-			}
-			else if (ball.vx < 0 && ball.vx > -20){
-				ball.vy = 5 //+ 1;
-			}
-			else{
-				ball.vy = 5;
-			}
+			ball.vy = 5;
     	}
 		
 		/*if(ball.vx > 0 && ball.vx < 20){
@@ -193,29 +178,12 @@ function animate()
 		//ball hits top
 		if(ball.y < player2.y - player2.height/6)
 		{
-			
-			if(ball.vy > 0 && ball.vy < 20){
-				ball.vy = -5 //- 1; //from up to down
-			}
-			else if (ball.vx < 0 && ball.vx > -20){
-				ball.vy = -5 //+ 1; //from down to up
-			}
-			else{
-				ball.vy = -5;
-			}
+			ball.vy = -5;
 		}
 		//ball hits bottom
 		if(ball.y > player2.y + player2.height/6)
 		{
-			if(ball.vy > 0 && ball.vy < 20){
-				ball.vy = 5 //- 1;
-			}
-			else if (ball.vx < 0 && ball.vx > -20){
-				ball.vy = 5 //+ 1;
-			}
-			else{
-				ball.vy = 5;
-			}
+			ball.vy = 5;
 		}
 		
 		/*if(ball.vx > 0 && ball.vx < 20){
