@@ -11,6 +11,8 @@ var player2;
 var p1Wins = 0;
 var p2Wins = 0;
 
+var img=document.getElementById("ric");
+
 	//Set Up the Canvas
 	canvas = document.getElementById("canvas");
 	context = canvas.getContext("2d");	
@@ -45,23 +47,6 @@ function animate()
 {
 	//Erase the Screen
 	context.clearRect(0,0,canvas.width, canvas.height);	
-	
-	//Net
-	context.save();
-	context.strokeStyle = 'thistle';
-	context.beginPath();
-	context.moveTo(canvas.width/2, 0);
-	context.lineTo(canvas.width/2, canvas.height);
-	context.closePath();
-	context.lineWidth = 5;
-	context.stroke();
-	context.restore();
-
-	//Win Counter
-	context.font = "20px Courier New";
-	context.textAlign = 'center';
-	context.fillText("Player 1 | Player 2", canvas.width/2, 20);
-	context.fillText(`${p1Wins}-${p2Wins}`, canvas.width/2, 45);
 
 	ball.move();
 
@@ -279,9 +264,29 @@ function animate()
 		}
 	}
 
+	//Net
+	context.save();
+	context.strokeStyle = 'thistle';
+	context.beginPath();
+	context.moveTo(canvas.width/2, 0);
+	context.lineTo(canvas.width/2, canvas.height);
+	context.closePath();
+	context.lineWidth = 5;
+	context.stroke();
+	context.restore();
+	
+	//Win Counter
+	context.font = "20px Courier New";
+	context.textAlign = 'center';
+	context.fillText("Player 1 | Player 2", canvas.width/2, 20);
+	context.fillText(`${p1Wins}-${p2Wins}`, canvas.width/2, 45);
+
+	//Image
+	context.drawImage(img, ball.x - 35, ball.y - 25, ball.width*2, ball.height/2);
+
 	//Update the Screen
 	player1.drawRect();
 	player2.drawRect();
-	ball.drawCircle();
+	//ball.drawCircle();
 	
 }
