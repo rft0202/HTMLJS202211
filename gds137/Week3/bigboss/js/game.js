@@ -7,6 +7,10 @@ var timer;
 var interval = 1000/60;
 var player;
 
+var frictionX = .85;		
+var frictionY = .97;
+var gravity = 1;
+
 var score = 0;
 
 	//Set Up the Canvas
@@ -16,7 +20,7 @@ var score = 0;
 	//Instantiate Player 1
 	player = new GameObject();
 	player.x = canvas.width/2;
-	player.y = canvas.height + 50;
+	player.y = canvas.height - 50;
 	player.width = 250;
 	player.height = 40; 
 	player.color = 'cyan';
@@ -40,89 +44,94 @@ function animate()
 	context.clearRect(0,0,canvas.width, canvas.height);	
 
 	ball.move();
+	ballGravity();
+	ballFriction();
 
-	//Move Player 1 (left)
-	if(w)
+	playerAcceleration();
+	playerFriction();
+	//Move Player
+	if(a)
 	{
-		console.log("Moving Up");
-		player.y += -3;
+		console.log("Moving Left");
+		player.x += -3;
+		player.vx += player.ax * -player.force;
 	}
-	if(s)
+	if(d)
 	{
-		console.log("Moving Down");
-		player.y += 3;
-	}
-
-	//Player 1 Wall Collision
-	if(player.y < player.height/2)
-	{
-		player.y = player.height/2;
-	}
-	if(player.y > canvas.height - player.height/2)
-	{
-		player.y = canvas.height - player.height/2;
+		console.log("Moving Right");
+		player.x += 3;
+		player.vx +=  player.ax * player.force;
 	}
 
-	//Ball Paddle 1 Collision
+	//Player Wall Collision
+	if(player.x < player.width/2)
+	{
+		player.x = player.width/2;
+	}
+	if(player.x > canvas.width - player.width/2)
+	{
+		player.x = canvas.width - player.width/2;
+	}
+
+	//Ball Paddle Collision
 	if(player.hitTestObject(ball))
 	{
 		//ball hits center
 		ball.vy = -35;
+		ball.y = player.height - ball.height/2;
+		score++
 		//ball hits inner left 1/6
-    	if(ball.x < player.x - player.width/6)
+    	if(ball.x < player.x - player.width/6 && ball.x > (player.x - player.width/6)/2)
      	{
 			ball.vx = -ball.force;
-			ball.vy = -35;
-			score++;
     	}
 		//ball outer left 1/6
-		if(ball.x > player.x + player.width/6)
+		if(ball.x < (player.x - player.width/6)/2)
      	{
 			ball.vx = -ball.force * 5;
-			ball.vy = -35;
-			score++;
     	}
 		//ball hits inner right 1/6
-    	if(ball.x < player.x - player.width/6)
+    	if(ball.x > player.x + player.width/6 && ball.x < (player.x - player.width/6 + (player.x - player.width/6)/2))
      	{
 			ball.vx = ball.force;
-			ball.vy = -35;
-			score++;
     	}
 		//ball outer right 1/6
-		if(ball.x > player.x + player.width/6)
+		if(ball.x > player.x - player.width/6 + (player.x - player.width/6)/2)
      	{
 			ball.vx = ball.force * 5;
-			ball.vy = -35;
-			score++;
     	}
 	}
 
 	//Ball Wall Collision
 	if(ball.x < ball.width/2)
 	{
-		ball.vx = -ball.vx;
+		ball.x = ball.width/2;
+		ball.vx = -ball.vx * 0.67;
 	}
 	if(ball.x > canvas.width - ball.width/2)
 	{
-		ball.vx = -ball.vx;
+		ball.x = canvas.width - ball.width/2;
+		ball.vx = -ball.vx * 0.67;
 	}
 	//top of screen
-	if(ball.y < ball.height/4)
+	if(ball.y < ball.height/2)
 	{
+		ball.y = ball.height/2;
 		ball.vy = -ball.vy;
+		//ball.vy = -ball.vy * 0.67;
 	}
 	//bottom of screen
-	if(ball.y > canvas.height - ball.height/4)
+	if(ball.y > canvas.height - ball.height/2)
 	{
-		ball.x = canvas.width/2;
-		ball.y = canvas.height/2;
-		ball.vx = 5;
+		ball.y = canvas.height - ball.height/2;
+		/*ball.vx = 5;
 		ball.vy = 0;
+		*/
+		ball.vy = -ball.vy * 0.67
 		score = 0;
 	}
 
-	//Net
+	//Line
 	context.save();
 	context.strokeStyle = 'black';
 	context.beginPath();
@@ -135,10 +144,35 @@ function animate()
 	
 	//Win Counter
 	context.font = "16px Arial black";
+	context.color = 'dark gray';
 	context.fillText(`Score: ${score}`, 80, 25);
 
 	//Update the Screen
 	player.drawRect();
 	ball.drawCircle();
 	
+}
+
+function ballGravity()
+{
+	ball.vy += gravity;
+	ball.y += ball.vy;
+}
+
+function ballFriction()
+{
+	ball.vy *= frictionY;
+	ball.vx *= frictionX;
+}
+
+function playerAcceleration()
+{
+	player.x += player.vx;
+	player.y += player.vy;
+}
+
+function playerFriction()
+{
+	player.vx *= frictionX;
+	player.x += player.vx;
 }

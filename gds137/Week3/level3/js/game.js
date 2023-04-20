@@ -135,11 +135,13 @@ function animate()
      	//ball hits top
     	if(ball.y < player1.y - player1.height/6)
      	{
+			ball.y = player1.y - player1.height/6
 			ball.vy = -5;
     	}
 		//ball hits bottom
 		if(ball.y > player1.y + player1.height/6)
      	{
+			ball.y = player1.y + player1.height/6
 			ball.vy = 5;
     	}
 		

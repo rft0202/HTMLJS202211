@@ -1,6 +1,6 @@
 //Define Booleans for each key
-var w = false;
-var s = false;
+var a = false;
+var d = false;
 
 //Add Event Listeners
 /* //advanced controls
@@ -20,13 +20,13 @@ function press(e)
 	//---This logs key codes into the browser's console.
 	//console.log("Pressed" + e.keyCode);
 	
-	if(e.keyCode == 87)
+	if(e.keyCode == 65)
 	{
-		w = true;
+		a = true;
 	}
-	if(e.keyCode == 83)
+	if(e.keyCode == 68)
 	{
-		s = true;
+		d = true;
 	}
 }
 
@@ -35,12 +35,12 @@ function release(e)
 	//---This logs key codes into the browser's console.
 	//console.log("Released" + e.keyCode);
 	
-	if(e.keyCode == 87)
+	if(e.keyCode == 65)
 	{
-		w = false;
+		a = false;
 	}
-	if(e.keyCode == 83)
+	if(e.keyCode == 68)
 	{
-		s = false;
+		d = false;
 	}
 }

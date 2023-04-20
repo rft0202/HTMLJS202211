@@ -10,6 +10,11 @@ function GameObject()
 	this.height = 100;
 	
 	//object's velocity or speed on each axis
+	this.force = 1;
+
+	this.ax = 1;
+	this.ay = 1;
+
 	this.vx = 0;
 	this.vy = 0;
 	
