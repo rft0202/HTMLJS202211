@@ -10,9 +10,16 @@ var player;
 	canvas = document.getElementById("canvas");
 	context = canvas.getContext("2d");	
 
-	player = new GameObject();
+	//player = new GameObject();
+	player = new GameObject(
+		{
+			color: 'blue', height:200
+		}
+	);
+	//var player2 = new GameObject(player); //same properties as player
 
 	//Instantiate platforms
+	//Platforms should be in an array
 		platform0 = new GameObject();
 		platform0.width = 500;
 		platform0.y = player.y +player.height/2 +platform0.height/2;
@@ -83,17 +90,24 @@ function animate()
 	player.y += Math.round(player.vy);
 	
 	//Hit the ground
-	while(platform0.hitTestPoint(player.bottom()) && player.vy >=0)
+	while(platform0.hitTestPoint(player.bottom()) && player.vy >=0)  //player is either standing still or falling
 	{
 		player.y--;
 		player.vy = 0;
 		player.canJump = true;
-	}
+	} //pushes player 1 pixel at a time until no longer colliding
 	
 	while(platform1.hitTestPoint(player.left()))
 	{
 		player.x++;
 		player.vx = 0;
+	}
+	//stand on platform 1 (added during class)
+	while(platform1.hitTestPoint({x: player.left().x, y: player.bottom().y}))
+	{
+		player.y--
+		player.vy = 0;
+		player.canJump = true;
 	}
 	
 	while(platform2.hitTestPoint(player.right()))

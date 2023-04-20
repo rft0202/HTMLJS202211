@@ -7,7 +7,7 @@ var timer;
 var interval = 1000/60;
 var player;
 
-var frictionX = .85;		
+var frictionX = .97;		
 var frictionY = .97;
 var gravity = 1;
 
@@ -33,7 +33,7 @@ var score = 0;
 	ball.radius = 40;
 	ball.vx = 5;
 	ball.vy = 0;
-	ball.force = 1;
+	ball.force = 5;
 
 	//Set the Animation Timer
 	timer = setInterval(animate, interval);
@@ -43,25 +43,28 @@ function animate()
 	//Erase the Screen
 	context.clearRect(0,0,canvas.width, canvas.height);	
 
-	ball.move();
-	ballGravity();
-	ballFriction();
+	ball.vy *= frictionY;
+	ball.vx *= frictionX;
 
-	playerAcceleration();
-	playerFriction();
+	ball.vy += gravity;
+
+	ball.move();
+
 	//Move Player
 	if(a)
 	{
 		console.log("Moving Left");
-		player.x += -3;
 		player.vx += player.ax * -player.force;
 	}
 	if(d)
 	{
 		console.log("Moving Right");
-		player.x += 3;
 		player.vx +=  player.ax * player.force;
 	}
+
+	player.vx *= frictionX;
+	
+	player.move();
 
 	//Player Wall Collision
 	if(player.x < player.width/2)
@@ -78,25 +81,26 @@ function animate()
 	{
 		//ball hits center
 		ball.vy = -35;
-		ball.y = player.height - ball.height/2;
+		ball.y = player.y - player.height/2 - ball.height/2;
+
 		score++
 		//ball hits inner left 1/6
-    	if(ball.x < player.x - player.width/6 && ball.x > (player.x - player.width/6)/2)
+    	if(ball.x < player.x - player.width/6 && ball.x > player.x - player.width/3)
      	{
 			ball.vx = -ball.force;
     	}
 		//ball outer left 1/6
-		if(ball.x < (player.x - player.width/6)/2)
+		if(ball.x < player.x - player.width/3)
      	{
 			ball.vx = -ball.force * 5;
     	}
 		//ball hits inner right 1/6
-    	if(ball.x > player.x + player.width/6 && ball.x < (player.x - player.width/6 + (player.x - player.width/6)/2))
+    	if(ball.x > player.x + player.width/6 && ball.x < player.x + player.width/3)
      	{
 			ball.vx = ball.force;
     	}
 		//ball outer right 1/6
-		if(ball.x > player.x - player.width/6 + (player.x - player.width/6)/2)
+		if(ball.x > player.x + player.width/3)
      	{
 			ball.vx = ball.force * 5;
     	}
@@ -151,28 +155,4 @@ function animate()
 	player.drawRect();
 	ball.drawCircle();
 	
-}
-
-function ballGravity()
-{
-	ball.vy += gravity;
-	ball.y += ball.vy;
-}
-
-function ballFriction()
-{
-	ball.vy *= frictionY;
-	ball.vx *= frictionX;
-}
-
-function playerAcceleration()
-{
-	player.x += player.vx;
-	player.y += player.vy;
-}
-
-function playerFriction()
-{
-	player.vx *= frictionX;
-	player.x += player.vx;
 }
