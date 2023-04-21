@@ -5,6 +5,8 @@ var context;
 var timer;
 var interval;
 var player;
+//method 1:
+//var key = false;
 
 
 	canvas = document.getElementById("canvas");
@@ -116,11 +118,12 @@ function animate()
 		player.x--;
 		player.vx = 0;
 	}
-	while(platform1.hitTestPoint(player.top()) && player.vy <=0)
+	/*while(platform1.hitTestPoint(player.top()) && player.vy <=0)
 	{
 		player.y++;
 		player.vy = 0;
 	}
+	*/
 	while(platform1.hitTestPoint(player.bottom()) && player.vy >=0)
 	{
 		player.y--;
@@ -132,6 +135,15 @@ function animate()
 		player.x++;
 		player.vx = 0;
 	}
+	//method 1:
+	/*
+	while(platform1.hitTestPoint(player.right()) && player.vx >=0 && !key)
+	{
+		player.x--;
+		player.vx = 0;
+	}
+	*/
+	//method 2:
 	while(platform1.hitTestPoint(player.right()) && player.vx >=0)
 	{
 		player.x--;
@@ -144,14 +156,35 @@ function animate()
 	//---------Get the pearl to open the door--------------------------------------------------------------------------------------------
 	//---------Hint: you'll need a new variable to keep track of the key-----------------------------------------------------------------
 	
+	//method 1:
+	/*
 	if(player.hitTestObject(goal))
 	{
 		goal.y = 10000;
+		key = true;
 	}
-	
-	
+	*/
+	/*
+	if(platform1.hitTestPoint(player.right()))
+	{
+		platform1.y = 10000;;
+	}
+	*/
 
-
+	//method 2:
+	if(player.hitTestObject(goal))
+	{
+		goal.y = player.right().y;
+		goal.x = player.right().x;
+	}
+	if(platform1.hitTestObject(goal))
+	{
+		platform1.y--;
+	}
+	if(platform1.hitTestPoint(player.top())) //moves the platform fully out of the way
+	{
+		platform1.y--;
+	}
 
 	
 
