@@ -66,7 +66,7 @@ function animate()
 	player.y += Math.round(player.vy);
 	
 
-	while(platform0.hitTestPoint(player.bottom()) && player.vy >=0)
+	while(platform0.hitTestPoint(player.bottom()) && player.vy >=0) 
 	{
 		player.y--;
 		player.vy = 0;
@@ -93,16 +93,14 @@ function animate()
 	//---------Objective: Get the blue pearl----------------------------------------------------------------------------------------------------
 	//---------Jump through and land on the block without changin the physics
 	
-	
 
-	while(platform1.hitTestPoint(player.top()) && player.vy <=0)
+
+	while(platform1.hitTestPoint(player.bottom()) && player.vy >=0) //player is either standing still or falling
 	{
-		player.y++;
+		player.y--;
 		player.vy = 0;
+		player.canJump = true;
 	}
-	
-	
-
 
 
 	
