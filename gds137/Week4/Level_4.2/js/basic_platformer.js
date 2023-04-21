@@ -66,7 +66,7 @@ function animate()
 	player.y += Math.round(player.vy);
 	
 
-	while(platform0.hitTestPoint(player.bottom()) && player.vy >=0)
+	while(platform0.hitTestPoint(player.bottomLeft()) && player.vy >=0)
 	{
 		player.y--;
 		player.vy = 0;
@@ -83,7 +83,7 @@ function animate()
 		player.vx = 0;
 	}
 	
-	while(platform1.hitTestPoint(player.bottom()) && player.vy >=0)
+	while(platform1.hitTestPoint(player.bottomRight()) && player.vy >=0)
 	{
 		player.y--;
 		player.vy = 0;
@@ -112,14 +112,14 @@ function animate()
 				You simply need to change the values of the x and y properties of the object literals listed below to find the solution.
 	*/
 
-	while(platform0.hitTestPoint({x:player.x, y:player.y}) && player.vy >=0)
+	while(platform0.hitTestPoint(player.bottomRight()) && player.vy >=0)
 	{
 		player.y--;
 		player.vy = 0;
 		player.canJump = true;
 	}
 	
-	while(platform1.hitTestPoint({x:player.x, y:player.y}) && player.vy >=0)
+	while(platform1.hitTestPoint(player.bottomLeft()) && player.vy >=0)
 	{
 		player.y--;
 		player.vy = 0;
@@ -136,6 +136,7 @@ function animate()
 	platform1.drawRect();
 
 	player.drawRect();
+	player.drawDebug();
 	
 	goal.drawCircle();
 }
