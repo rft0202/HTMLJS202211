@@ -56,6 +56,10 @@ function animate()
 	{
 		player.vx += player.ax * player.force;
 	}
+	/*if(s)
+	{
+		player.vy += -player.jumpHeight;
+	}*/
 
 	player.vx *= fX;
 	player.vy *= fY;
@@ -95,13 +99,12 @@ function animate()
 	
 	
 
-	while(platform1.hitTestPoint(player.bottom()) && player.vy >=0 )
+	while(platform1.hitTestPoint(player.bottom()) && player.vy >=0 && !s)
 	{
 		player.canJump = true;
 		player.y--;
 		player.vy = 0;
 	}
-	
 	
 
 
