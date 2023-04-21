@@ -19,7 +19,7 @@ var player;
 		
 	
 	platform1 = new GameObject();
-		platform1.x = platform1.width;
+		platform1.x = canvas.width/2 + 150;
 		platform1.y = platform0.y- platform0.height/2 - platform1.height/2;
 		platform1.color = "#66ff33";
 		platform1.vx = 3;
@@ -117,9 +117,9 @@ function animate()
 		player.vx = 0;
 	}
 	
-	while(platform1.hitTestPoint(player.left()))
+	while(platform1.hitTestPoint(player.right()))
 	{
-		player.x++;
+		player.x--;
 	}
 	
 	//---------Objective: Save Me!---------------------------------------------------------------------------------------------------- 
@@ -139,6 +139,7 @@ function animate()
 	
 	
 	platform0.drawRect();
+	platform1.drawRect();
 	platform2.drawRect();
 	
 	player.drawRect();
