@@ -12,6 +12,8 @@ var player;
 
 	player = new GameObject({x:100, y:canvas.height/2-100});
 
+	//flame = new GameObject(player);
+
 	platform0 = new GameObject();
 		platform0.width = 200;
 		platform0.x = platform0.width/2;
@@ -26,18 +28,25 @@ var player;
 	
 	var gravity = 1;
 
+	player.canJump = true;
+	player.jumpHeight = -10;
+
 	interval = 1000/60;
 	timer = setInterval(animate, interval);
 
 function animate()
 {
-	
 	context.clearRect(0,0,canvas.width, canvas.height);	
 
-	if(w && player.canJump && player.vy ==0)
+	//if(w && player.canJump && player.vy ==0)
+	if(w)
 	{
-		player.canJump = false;
-		player.vy += player.jumpHeight;
+		//player.canJump = false;
+		//player.vy += player.jumpHeight;
+		player.vy = player.jumpHeight;
+		//draw flame
+		player.drawTriangle();
+		
 	}
 
 	if(a)
@@ -62,7 +71,7 @@ function animate()
 	{
 		player.y--;
 		player.vy = 0;
-		player.canJump = true;
+		//player.canJump = true;
 	}
 	while(platform0.hitTestPoint(player.left()) && player.vx <=0)
 	{
@@ -92,7 +101,7 @@ function animate()
 	{
 		goal.y = 10000;
 		context.textAlign = "center";
-		context.drawText("You Win!!!", canvas.width/2, canvas.height/2);
+		context.fillText("You Win!!!", canvas.width/2, canvas.height/2);
 	}
 	
 	

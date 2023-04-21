@@ -36,9 +36,36 @@ function GameObject(obj)
 			context.translate(this.x, this.y);
 			context.fillRect((-this.width/2), (-this.height/2), this.width, this.height);
 		context.restore();
-		
 	}	
-	
+
+	this.drawTriangle = function()
+	{
+		/*
+		context.save();
+			context.fillStyle = "orange"
+			context.translate(this.x, this.y);
+			context.beginPath();
+			context.moveTo(this.left().x, this.bottom().y);
+			context.lineTo(88.5, 155.5);
+			context.lineTo(178, 0);
+			context.lineTo(this.left().x, this.bottom().y);
+			context.closePath();
+			context.fill();
+		context.restore();
+		*/
+		context.save();
+			context.fillStyle = "orange"
+			context.translate(this.x, this.y);
+			context.beginPath();
+			context.moveTo(0, 0);
+			context.lineTo(this.width, this.height);
+			context.lineTo(this.width/2, 0);
+			context.lineTo(0, 0);
+			context.closePath();
+			context.fill();
+		context.restore();
+	}
+
 	this.drawCircle = function()
 	{
 		context.save();
