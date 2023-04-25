@@ -127,6 +127,7 @@ function animate()
 	{
 		player.y--;
 		enemy1.health -= 10; //for later
+		console.log("Enemy1 Health: " + enemy1.health);
 	}
 
 	//Player Collision with top of Enemy2
@@ -134,6 +135,7 @@ function animate()
 	{
 		player.y--;
 		enemy2.health -= 10; //for later
+		console.log("Enemy2 Health: " + enemy2.health);
 	}
 
 	//Enemy1 Collision with Player
@@ -143,6 +145,7 @@ function animate()
 		enemy1.x++;
 		enemy1.vx = 0;
 		player.health -= 10; //for later
+		console.log("Player Health: " + player.health);
 	}
 
 	//Enemy2 Collision with Player
@@ -151,6 +154,7 @@ function animate()
 		enemy2.x++;
 		enemy2.vx = 0;
 		player.health -= 10; //for later
+		console.log("Player Health: " + player.health);
 	}
 
 	//Player 1 Wall Collision
