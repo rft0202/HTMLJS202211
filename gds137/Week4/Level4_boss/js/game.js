@@ -7,33 +7,45 @@ var timer;
 var interval = 1000/60;
 var player;
 var enemy1;
-
-var p1Wins = 0;
-var p2Wins = 0;
-
-var img=document.getElementById("ric");
+var enemy2;
 
 	//Set Up the Canvas
 	canvas = document.getElementById("canvas");
 	context = canvas.getContext("2d");	
+
+	//Instantiate Platform
+	//Platforms should be in an array
+	platform = new GameObject();
+	platform.width = canvas.width*2;
+	platform.x = canvas.width/2;
+	platform.y = canvas.height - platform.height/2;
+	platform.color = "mediumseagreen";
 	
 	//Instantiate Player 1
 	player = new GameObject();
-	player.x = 0;
-	player.y = canvas.height/2;
-	player.width = 20;
-	player.height = 125; 
-	player.color = 'mediumslateblue';
+	player.width = 25;
+	player.height = 75; 
+	player.x = player.width;
+	player.y = canvas.height - platform.height;
+	player.color = 'hotpink';
 
 	//Instantiate Enemy 1
 	enemy1 = new BraveEnemy();
-	enemy1.x = canvas.width;
-	enemy1.y = canvas.height/2;
-	enemy1.width = 20;
-	enemy1.height = 125; 
-	enemy1.color = 'lightseagreen';
+	enemy1.x = canvas.width - enemy1.width/1.5;
+	enemy1.y = canvas.height - platform.height;
 
-	//Set the Animation Timer
+	//Instantiate Enemy 2
+	enemy2 = new CowardlyEnemy();
+	enemy2.x = canvas.width/2;
+	enemy2.y = canvas.height - platform.height;
+
+	//Global Physics Variables
+	var fX = .90;
+	var fY = .97;
+
+	var gravity = 1;
+
+	interval = 1000/60;
 	timer = setInterval(animate, interval);
 
 function animate()
@@ -41,56 +53,116 @@ function animate()
 	//Erase the Screen
 	context.clearRect(0,0,canvas.width, canvas.height);	
 
-	//Move Player 1 (left)
-	if(w)
+	//Move Player
+	if(w && player.canJump)
 	{
-		console.log("Moving Up");
-		player.y += -3;
+		player.canJump = false;
+		player.vy += player.jumpHeight;
 	}
-	if(s)
-	{
-		console.log("Moving Down");
-		player.y += 3;
-	}
+	
+	//Apply acceleration to velocity.
 	if(a)
 	{
-		console.log("Moving Left");
-		player.x += -3;
+		player.vx += -player.ax * player.force;
 	}
 	if(d)
 	{
-		console.log("Moving Right");
-		player.x += 3;
+		player.vx += player.ax * player.force;
 	}
 	
-	 //FOR OWN GAME
-	//Player 2 AI - Hit the Ball
-	var dx = player.x - enemy1.x; //how many pixels apart y
-	var dy = player.y - enemy1.y; //how many pixels apart x
-	var rad = Math.atan2(dy,dx); //angle of triangle
-	enemy1.vy += Math.sin(rad)*1; //force
-	enemy1.vy *= .97; //friction
-	var dist = Math.sqrt(dx*dx + dy*dy) //hypotenuse
-	if (dist < 100)
-	{
-		enemy1.move();
-	}
+	//Player physics
+	player.vx *= fX;
+	player.vy *= fY;
 	
-	/*
-	//Player 2 AI - Run away from the Ball
-	var dx = ball.x - player2.x; //how many pixels apart y
-	var dy = ball.y - player2.y; //how many pixels apart x
-	var rad = Math.atan2(dy,dx); //angle of triangle
-	player2.vy += Math.sin(rad)*-1; //force //negative 1 makes it run away
-	player2.vy *= .97; //friction
-	var dist = Math.sqrt(dx*dx + dy*dy) //hypotenuse
-	if (dist < 200)
+	player.vy += gravity;
+	
+	player.x += Math.round(player.vx);
+	player.y += Math.round(player.vy);
+
+	//Hit the platform
+	while(platform.hitTestPoint(player.bottom()) && player.vy >=0)
 	{
-		player2.move();
+		player.y--;
+		player.vy = 0;
+		player.canJump = true;
+	} 
+
+	//Enemy1 Physics
+	enemy1.vx *= fX;
+	enemy1.vy *= fY;
+	
+	enemy1.vy += gravity;
+	
+	//enemy1.x += Math.round(enemy1.vx);
+	//enemy1.y += Math.round(enemy1.vy);
+
+	//Hit the platform
+	while(platform.hitTestPoint(enemy1.bottom()) && enemy1.vy >=0)
+	{
+		enemy1.y--;
+		enemy1.vy = 0;
+		//enemy1.canJump = true;
+	} 
+
+	//Enemy2 Physics
+	enemy2.vx *= fX;
+	enemy2.vy *= fY;
+	
+	enemy2.vy += gravity;
+
+	//Hit the platform
+	while(platform.hitTestPoint(enemy2.bottom()) && enemy2.vy >=0)
+	{
+		enemy2.y--;
+		enemy2.vy = 0;
+		//enemy1.canJump = true;
+	} 
+
+
+	enemy1.attack();
+	enemy2.flee();
+
+	//Player Collision with top of Enemy1
+	while(player.hitTestPoint(enemy1.top())) 
+	{
+		player.y--;
+		enemy1.health -= 10; //for later
 	}
-	*/
+
+	//Player Collision with top of Enemy2
+	while(player.hitTestPoint(enemy2.top()))
+	{
+		player.y--;
+		enemy2.health -= 10; //for later
+	}
+
+	//Enemy1 Collision with Player
+	while(enemy1.hitTestObject(player))
+	{
+		//enemy1.x -= player.width - enemy1.width/2;
+		enemy1.x++;
+		enemy1.vx = 0;
+		player.health -= 10; //for later
+	}
+
+	//Enemy2 Collision with Player
+	while(enemy2.hitTestObject(player))
+	{
+		enemy2.x++;
+		enemy2.vx = 0;
+		player.health -= 10; //for later
+	}
 
 	//Player 1 Wall Collision
+	if(player.x < player.width/2)
+	{
+		player.x = player.width/2;
+	}
+	if(player.x > canvas.width - player.width/2)
+	{
+		player.x = canvas.width - player.width/2;
+	}
+
 	if(player.y < player.height/2)
 	{
 		player.y = player.height/2;
@@ -100,7 +172,16 @@ function animate()
 		player.y = canvas.height - player.height/2;
 	}
 
-	//Player 2 Wall Collision
+	//Enemy 1 Wall Collision
+	if(enemy1.x < enemy1.width/2)
+	{
+		enemy1.x = enemy1.width/2;
+	}
+	if(enemy1.x > canvas.width - enemy1.width/2)
+	{
+		enemy1.x = canvas.width - enemy1.width/2;
+	}
+
 	if(enemy1.y < enemy1.height/2)
 	{
 		enemy1.y = enemy1.height/2;
@@ -110,8 +191,28 @@ function animate()
 		enemy1.y = canvas.height - enemy1.height/2;
 	}
 
+	//Enemy 2 Wall Collision
+	if(enemy2.x < enemy2.width/2)
+	{
+		enemy2.x = enemy2.width/2;
+	}
+	if(enemy2.x > canvas.width - enemy2.width/2)
+	{
+		enemy2.x = canvas.width - enemy2.width/2;
+	}
+
+	if(enemy2.y < enemy2.height/2)
+	{
+		enemy2.y = enemy2.height/2;
+	}
+	if(enemy2.y > canvas.height - enemy2.height/2)
+	{
+		enemy2.y = canvas.height - enemy2.height/2;
+	}
+
 	//Update the Screen
+	platform.drawRect();
 	player.drawRect();
 	enemy1.drawCircle();
-	
+	enemy2.drawRect();
 }
