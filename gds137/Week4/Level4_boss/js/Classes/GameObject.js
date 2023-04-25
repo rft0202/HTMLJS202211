@@ -1,4 +1,3 @@
-
 function GameObject(obj)
 {	
 		this.x = canvas.width/2;
@@ -11,24 +10,22 @@ function GameObject(obj)
 		this.ay = 1;
 		this.vx = 0;
 		this.vy = 0;
+		
+		//whether or not the object can jump
+		this.canJump = false;
+		this.jumpHeight = -25;
 
-	//whether or not the object can jump
-	this.canJump = false;
-	this.jumpHeight = -25;
-	
-	//------Allows us to pass object literals into the class to define its properties--------//
+		//------Allows us to pass object literals into the class to define its properties--------//
 		//------This eliminate the need to pass in the property arguments in a specific order------------//
 		if(obj!== undefined)
 		{
 			for(value in obj)
 			{
-				if(this[value]!== undefined)
-				{
-					this[value] = obj[value];
-				}
+				if(this[value]!== undefined) //if not undefined
+				this[value] = obj[value]; //change it to the value in basic_platformer.js
 			}
 		}
-		
+
 	this.drawRect = function()
 	{
 		context.save();
@@ -36,23 +33,9 @@ function GameObject(obj)
 			context.translate(this.x, this.y);
 			context.fillRect((-this.width/2), (-this.height/2), this.width, this.height);
 		context.restore();
+		
 	}	
-
-	this.drawTriangle = function()
-	{
-		context.save();
-			context.fillStyle = "orange"
-			context.translate(this.x - this.width/2, this.y);
-			context.beginPath();
-			context.moveTo(0, 0);
-			context.lineTo(this.width/2, this.height);
-			context.lineTo(this.width, 0);
-			context.lineTo(0, 0);
-			context.closePath();
-			context.fill();
-		context.restore();
-	}
-
+	
 	this.drawCircle = function()
 	{
 		context.save();
@@ -91,6 +74,11 @@ function GameObject(obj)
 	{
 		return {x:this.x , y:this.y + this.height/2}
 	}
+	/*this.bottomLeft = function() 
+	{
+		return {x: this.left().x, y:this.bottom().y}
+	}
+	*/
 	
 	this.hitTestObject = function(obj)
 	{
@@ -115,12 +103,6 @@ function GameObject(obj)
 			return true;
 		}
 		return false;
-	}
-	
-	/*-----Sets or gets the radius value--------*/
-	this.radius = function(newRadius)
-	{
-			return this.width/2; 
 	}
 	
 	//Draws the collision points
