@@ -55,11 +55,11 @@ function GameObject(obj)
 		*/
 		context.save();
 			context.fillStyle = "orange"
-			context.translate(this.x, this.y);
+			context.translate(this.x - this.width/2, this.y);
 			context.beginPath();
 			context.moveTo(0, 0);
-			context.lineTo(this.width, this.height);
-			context.lineTo(this.width/2, 0);
+			context.lineTo(this.width/2, this.height);
+			context.lineTo(this.width, 0);
 			context.lineTo(0, 0);
 			context.closePath();
 			context.fill();

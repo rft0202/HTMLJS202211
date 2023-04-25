@@ -5,14 +5,13 @@ var context;
 var timer;
 var interval;
 var player;
+var goalGet = false;
 
 
 	canvas = document.getElementById("canvas");
 	context = canvas.getContext("2d");	
 
 	player = new GameObject({x:100, y:canvas.height/2-100});
-
-	//flame = new GameObject(player);
 
 	platform0 = new GameObject();
 		platform0.width = 200;
@@ -100,6 +99,11 @@ function animate()
 	if(player.hitTestObject(goal))
 	{
 		goal.y = 10000;
+		goalGet = true;
+	}
+	if (goalGet)
+	{
+		context.font = "20px Arial";
 		context.textAlign = "center";
 		context.fillText("You Win!!!", canvas.width/2, canvas.height/2);
 	}
