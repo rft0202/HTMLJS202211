@@ -53,7 +53,8 @@ function BraveEnemy(obj)
 	this.move = function()
 	{
 		this.vx += -this.ax * this.force;
-		if(this.x > player.x) //player is to the left of enemy
+		this.x += this.vx;
+		/*if(this.x > player.x) //player is to the left of enemy
 		{
 			this.x += this.vx;
 		}
@@ -61,6 +62,7 @@ function BraveEnemy(obj)
 		{
 			this.x -= this.vx;
 		}
+		*/
 		//this.y += this.vy;
 	}
 	
@@ -68,8 +70,8 @@ function BraveEnemy(obj)
 	{
 		var dx = player.x - this.x; //how many pixels apart y
 		var dy = player.y - this.y; //how many pixels apart x
-		var rad = Math.atan2(dy,dx); //angle of triangle
-		this.vx += Math.sin(rad)*1; //force
+		var rad = Math.atan2(dy,dx); //angle of triangle //changed from sin() to cos() since it is associated with the horizontal offset
+		this.vx += Math.cos(rad)*1; //force
 		//this.vy *= .97; //friction
 		var dist = Math.sqrt(dx*dx + dy*dy) //hypotenuse
 		if (dist < 300)

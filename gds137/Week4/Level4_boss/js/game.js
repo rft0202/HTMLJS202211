@@ -138,8 +138,8 @@ function animate()
 		console.log("Enemy2 Health: " + enemy2.health);
 	}
 
-	//Enemy1 Collision with Player
-	while(enemy1.hitTestObject(player))
+	//Player Collision with Enemy1 Left
+	while(player.hitTestPoint(enemy1.left()))
 	{
 		//enemy1.x -= player.width - enemy1.width/2;
 		enemy1.x++;
@@ -147,11 +147,28 @@ function animate()
 		player.health -= 10; //for later
 		console.log("Player Health: " + player.health);
 	}
-
-	//Enemy2 Collision with Player
-	while(enemy2.hitTestObject(player))
+	//Player Collision with Enemy1 Right
+	while(player.hitTestPoint(enemy1.right()))
 	{
-		enemy2.x++;
+		//enemy1.x -= player.width - enemy1.width/2;
+		enemy1.x--;
+		enemy1.vx = 0;
+		player.health -= 10; //for later
+		console.log("Player Health: " + player.health);
+	}
+
+	//Player Collision with Enemy2 Left
+	while(player.hitTestPoint(enemy2.left()))
+	{
+		player.x--;
+		enemy2.vx = 0;
+		player.health -= 10; //for later
+		console.log("Player Health: " + player.health);
+	}
+	//Player Collision with Enemy2 Right
+	while(player.hitTestPoint(enemy2.right()))
+	{
+		player.x++;
 		enemy2.vx = 0;
 		player.health -= 10; //for later
 		console.log("Player Health: " + player.health);
