@@ -145,8 +145,8 @@ function animate()
 		} 
 
 
-		enemy1.attack();
-		enemy2.flee();
+		enemy1.attack(player);
+		enemy2.flee(player);
 
 
 		//Player Collision with top of Enemy1
