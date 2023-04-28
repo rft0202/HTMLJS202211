@@ -10,7 +10,7 @@ function CowardlyEnemy(obj)
 		this.ay = 1;
 		this.vx = 0;
 		this.vy = 0;
-		this.health = 100;
+		this.health = 2;
 
 		//whether or not the object can jump
 		this.canJump = false;

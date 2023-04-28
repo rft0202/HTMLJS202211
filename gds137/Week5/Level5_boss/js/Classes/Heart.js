@@ -1,17 +1,17 @@
-function BraveEnemy(obj)
+function Heart(obj)
 {	
-		this.x = canvas.width/2;
-		this.y = canvas.height/2;
 		this.width = 50;
 		this.height = 50;
-		this.color = "firebrick";
-		this.force = 0.5;
+		this.x = this.width;
+		this.y = this.height;
+		this.color = 'red';
+		this.force = 1;
 		this.ax = 1;
 		this.ay = 1;
 		this.vx = 0;
 		this.vy = 0;
-		this.health = 2;
-
+		this.health = 100;
+		
 		//whether or not the object can jump
 		this.canJump = false;
 		this.jumpHeight = -25;
@@ -43,7 +43,7 @@ function BraveEnemy(obj)
 			context.fillStyle = this.color;
 			context.beginPath();
 			context.translate(this.x, this.y);
-			context.arc(0,0,this.width/2,0,360*Math.PI/180,true)
+			context.arc(0, 0, this.radius(), 0, 360 *Math.PI/180, true);
 			context.closePath();
 			context.fill();
 		context.restore();
@@ -52,34 +52,10 @@ function BraveEnemy(obj)
 	
 	this.move = function()
 	{
-		this.vx += -this.ax * this.force;
 		this.x += this.vx;
-		/*if(this.x > player.x) //player is to the left of enemy
-		{
-			this.x += this.vx;
-		}
-		else
-		{
-			this.x -= this.vx;
-		}
-		*/
-		//this.y += this.vy;
+		this.y += this.vy;
 	}
 	
-	this.attack = function()
-	{
-		var dx = player.x - this.x; //how many pixels apart y
-		var dy = player.y - this.y; //how many pixels apart x
-		var rad = Math.atan2(dy,dx); //angle of triangle //changed from sin() to cos() since it is associated with the horizontal offset
-		this.vx += Math.cos(rad)*1; //force
-		//this.vy *= .97; //friction
-		var dist = Math.sqrt(dx*dx + dy*dy) //hypotenuse
-		if (dist < 300)
-		{
-			this.move();
-			//console.log(this.x + ", " + this.y);
-		}
-	}
 	
 	//---------Returns object's for the top, bottom, left and right of an object's bounding box.
 	this.left = function() 
@@ -91,14 +67,6 @@ function BraveEnemy(obj)
 		return {x:this.x + this.width/2 , y:this.y}
 	}
 	
-	this.topLeft = function()
-	{
-		return {x:this.left().x, y: this.top().y}
-	}
-	this.topRight = function()
-	{
-		return {x:this.Right().x, y: this.top().y}
-	}
 	this.top = function() 
 	{
 		return {x:this.x, y:this.y - this.height/2}
