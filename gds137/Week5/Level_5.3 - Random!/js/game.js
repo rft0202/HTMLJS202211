@@ -27,6 +27,17 @@ var player;
 	
 	//---------------------------------------------------------------------------------------------------------------
 	
+	var amount = 12;
+
+	particles = [];
+	
+	for(var i = 0; i < amount; i++)
+	{
+		particles[i] = new GameObject();
+		particles[i].x = Math.random() * canvas.width;
+		particles[i].y = Math.random() * canvas.height;
+	}
+
 	var fX = .85;
 	var fY = .97;
 	
@@ -47,6 +58,10 @@ function animate()
 	
 	
 	//----------------------------------------------------------------------------------------------------------------------
+	for(var i = 0; i < amount; i++)
+	{
+		particles[i].drawRect();
+	}
 }
 
 //-----------------------------------------------FINAL STEP: View Particles-------------------------------------------------
