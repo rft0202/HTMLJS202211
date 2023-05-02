@@ -56,14 +56,13 @@ function animate()
 			//     (Hint: The code to do this is already written above)
 		//-------------------------------------------------------------------------------------------------------------------------
 		
-		/*
 		if(particles[p].y > canvas.height)
 		{
-			particles[i].y = -particles[i].height;
-			particles[i].vy = Math.random() * 10 + 5;
-			particles[i].color = colors[randomColor];
+			particles[p].y = -particles[p].height;
+			particles[p].vy = Math.random() * 10 + 5;
+			randomColor = Math.round(Math.random());
+			particles[p].color = colors[randomColor];
 		}
-		*/
 
 		particles[p].drawRect();
 	}
