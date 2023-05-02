@@ -159,6 +159,13 @@ function boom()
 		//	1.Change the platform[1]'s y position to -100000
 		//	2.Change each particles vx so that it is a random number between -10 and 10.
 		//	3.Change each particles vy so that it is a random number between -10 and 10.
+
+	for(var p = 0; p < particles.length; p++)
+	{	
+		platform[1].y = -100000;
+		particles[p].vx = Math.random() * -20 + 10; // (-10-10) + 10
+		particles[p].vy = Math.random() * -20 + 10;
+	}
 }
 
 
