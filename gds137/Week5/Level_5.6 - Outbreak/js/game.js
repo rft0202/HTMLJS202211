@@ -53,6 +53,9 @@ function animate()
 			//  3. Run the program and see what happens when you randomly generate velocities every frame.
 		//-------------------------------------------------------------------------------------------------------------------------
 		
+		particles[p].vx = Math.random() * -2 + 1; //(-1-1) + 1
+		particles[p].vy = Math.random() * -2 + 1; 
+
 		particles[p].drawRect();
 	}
 	
