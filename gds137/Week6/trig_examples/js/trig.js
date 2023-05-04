@@ -11,10 +11,20 @@ var player;
 
 	player = new GameObject();
 	player.force = 1;
+	//player.force = 5;
 	
 	follower = new GameObject();
-	follower.x = 0;
-	follower.y = 0;
+	//follower.x = 0;
+	//follower.y = 0;
+	follower.x = 100;
+	follower.y = 100;
+
+	/*
+	var ret = new GameObject();
+	ret.width = 20;
+	ret.height = 20;
+	ret.color = 'black';
+	*/
 	
 	//friction
 	var fX = .80;
@@ -39,17 +49,62 @@ function animate()
 	//a and d rotate the triangle
 	angularMovement();
 	
+	//Added in class:
+	
+	/*
+	var dx = player.x - follower.x;
+	var dy = player.y - follower.y;
+	var dist  = Math.sqrt(dx*dx + dy*dy);
+
+	if (dist < 200)
+	{
+		follower.vx = dx * .05;
+		follower.vy = dy * .05;
+	}
+
+	var rad = Math.atan2(dy, dx);
+	//rad = deg * Math.PI/180;
+	//deg = rad * 180/Math.PI;
+	follower.angle = rad * 180/Math.PI; //points at player
+
+	//follower.move();
+	*/
+	/* 
+	// Couldn't copy everything in time
+	//Reticle
+	var dx = player.x - ret.x;
+	var dy = player.y - ret.y;
+	var dist  = Math.sqrt(dx*dx + dy*dy);
+
+	
+	
+		ret.vx = dx * .05;
+		ret.vy = dy * .05;
+
+		dx = ret.x = follower.x;
+		dy = ret.y - follower.y;
+	
+
+	var rad = Math.atan2(dy, dx);
+	//rad = deg * Math.PI/180;
+	//deg = rad * 180/Math.PI;
+	follower.angle = rad * 180/Math.PI; //points at player
+	*/
+
+	//End of additions
+
 	/*-----------These move the follower-----------------*/
 	//magnet(); //- eases the follower towards the player - 
-	//point(); //- points at the player
-	//follow(); //- follows the player
-	//orbit(); //- orbits the player using physics
-	//revolve(); //- orbits the player without physics.
+	point(); //- points at the player
+	//follow(); //- follows the player //moves at a constant speed
+	//orbit(); //- orbits the player using physics //accelerate towards the player
+	revolve(); //- orbits the player without physics. //revolves around a point
 	//sinWave(); //- moves the follower in a sin wave pattern from left to right
 	
 	
 	player.drawTriangle();
 	follower.drawTriangle();
+	//ret.drawCircle();
 }
 
 function angularMovement()
@@ -60,10 +115,10 @@ function angularMovement()
 		var radians = player.angle * Math.PI/180;
 		
 		//Calculate acceleration modifiers (lengtha and height of triangle)
-		player.ax = Math.cos(radians);
+		player.ax = Math.cos(radians); //angle
 		player.ay = Math.sin(radians);
 		
-		player.vx += player.ax * player.force;
+		player.vx += player.ax * player.force; //player.force is the hypotenuse
 		player.vy += player.ay * player.force;
 	}
 	
@@ -104,10 +159,12 @@ function angularMovement()
 
 function revolve()
 {
-	angle-=5;
+	angle-=5; //determines the speed at which it spins
 	var radians = angle * Math.PI/180;
 	
-	follower.x = player.x + Math.cos(radians) * 200;
+	//follower.x += 2; //without point() and follower.x below 
+
+	follower.x = player.x + Math.cos(radians) * 200; //200 is how far away you want the follower to be
 	follower.y = player.y + Math.sin(radians) * 200;
 }
 	
@@ -120,7 +177,7 @@ function magnet()
 	//Not using this in this function but...
 	//This is the Pythagorean Theorem and gets the hypoteneuse of a triangle.
 	//This can be used to get the actual distance between two points.
-	var dist = Math.sqrt(dx * dx + dy * dy);
+	//var dist = Math.sqrt(dx * dx + dy * dy);
 	
 	follower.x += dx /25;
 	follower.y += dy /25;
@@ -143,14 +200,14 @@ function follow()
 	var dx = player.x - follower.x;
 	var dy = player.y - follower.y;
 	
-	var dist = Math.sqrt(dx * dx + dy * dy);
+	//var dist = Math.sqrt(dx * dx + dy * dy);
 	
 	var radians = Math.atan2(dy, dx);
 	
-	follower.vx = Math.cos(radians)*follower.force;
+	follower.vx = Math.cos(radians)*follower.force; 
 	follower.vy = Math.sin(radians)*follower.force;
 
-	follower.x += follower.vx * 2;
+	follower.x += follower.vx * 2; //* 2 just makes it faster
 	follower.y += follower.vy * 2;
 }
 
@@ -165,9 +222,9 @@ function orbit()
 	
 	angle = radians * 180/Math.PI;
 	
-	follower.vx += Math.cos(radians)*follower.force;
+	follower.vx += Math.cos(radians)*follower.force; //accelerate
 	follower.vy += Math.sin(radians)*follower.force;
-	
+
 	follower.x += follower.vx * 2;
 	follower.y += follower.vy * 2;
 

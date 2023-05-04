@@ -12,6 +12,7 @@ function GameObject(obj)
 		this.vx = 0;
 		this.vy = 0;
 		
+		//!!!NEW!!!
 		//the angle that the graphic is drawn facing.
 		this.angle = 0;
 		
@@ -38,6 +39,7 @@ function GameObject(obj)
 		context.save();
 			context.fillStyle = this.color;
 			context.translate(this.x, this.y);
+			//context.rotate(this.angle * Math.PI/180); //rotate rectangle
 			context.fillRect((-this.width/2), (-this.height/2), this.width, this.height);
 		context.restore();
 		
