@@ -57,8 +57,14 @@ function animate()
 		pearl.vy = dy * .05;
 	}
 
-	/* 
 	if (pearl.x == player.x && pearl.y == player.y)
+	{
+		pearl.x = 100000;
+		pearl.y = 100000;
+	}
+
+	/*
+	if (pearl.hitTestPoint(player.x) && pearl.hitTestPoint(player.y))
 	{
 		pearl.x = 100000;
 		pearl.y = 100000;
@@ -66,7 +72,7 @@ function animate()
 	*/
 
 	/*
-	if (pearl.hitTestPoint(player.x) && pearl.hitTestPoint(player.y))
+	if (pearl.hitTestObject(player))
 	{
 		pearl.x = 100000;
 		pearl.y = 100000;
