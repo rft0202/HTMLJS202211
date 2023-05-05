@@ -188,7 +188,7 @@ function point()
 	var dx = player.x - follower.x;
 	var dy = player.y - follower.y;
 	
-	var dist = Math.sqrt(dx * dx + dy * dy);
+	//var dist = Math.sqrt(dx * dx + dy * dy);
 	
 	var radians = Math.atan2(dy, dx);
 	
@@ -216,7 +216,7 @@ function orbit()
 	var dx = player.x - follower.x;
 	var dy = player.y - follower.y;
 	
-	var dist = Math.sqrt(dx * dx + dy * dy);
+	//var dist = Math.sqrt(dx * dx + dy * dy);
 	
 	var radians = Math.atan2(dy, dx);
 	
