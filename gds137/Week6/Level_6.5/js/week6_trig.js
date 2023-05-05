@@ -124,14 +124,19 @@ states["play"] = function()
 	
 	//-----------------------Find the angle between the player and the mouse object in radians---------------------------------
 	//-----------------------Store it in "var radians"--------------------------------------------------------------------------
-	
+	var dx = mouse.x - player.x;
+	var dy = mouse.y - player.y;
+
+	var radians = Math.atan2(dy, dx);
 	
 	//----------------------Convert radians to degrees. Store it in a variable called "var deg";
 	//----------------------Set player.angle equal to the "deg" variable.
-
+	var deg = radians * 180/Math.PI;
+	player.angle = deg;
 
 	//----------------------Find the player's vx and vy if the hypoteneuse is "player.force" and the angle is the "radians" variable.
-	
+	player.vx = Math.cos(radians) * player.force;
+	player.vy = Math.sin(radians) * player.force;
 
 	//--------------------------------------------------------------------------------------------------------------------------
 	//------------------------------------------------------END OF INSTRUCTIONS-------------------------------------------------
