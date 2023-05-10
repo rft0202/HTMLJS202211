@@ -58,6 +58,14 @@ var img=document.getElementById("heart");
 
 	var enemy2 = enemyC[0];
 
+	var cookie = new GameObject(enemy1);
+	cookie.width = enemy1.width/2;
+	cookie.height = enemy1.height/2;
+
+	var cracker = new GameObject(enemy2);
+	cracker.width = enemy2.width/2;
+	cracker.height = enemy2.height/2;
+
 	//Global Physics Variables
 	var fX = .90;
 	var fY = .97;
@@ -284,6 +292,8 @@ function animate()
 		player.drawRect();
 		enemy1.drawCircle();
 		enemy2.drawRect();
+		cookie.drawCircle();
+		cracker.drawRect();
 
 		//Player Health
 		var hearts = [];
@@ -341,6 +351,8 @@ function loseEnemy1Health()
 			enemy1.vy = -1;
 			enemy1.y = -10000;
 			console.log("Enemy 1 Died");
+			cookie.x = enemy1.x;
+			cookie.y = (canvas.height - platforms[0].height) - cookie.width/2;
 		}
 	}
 

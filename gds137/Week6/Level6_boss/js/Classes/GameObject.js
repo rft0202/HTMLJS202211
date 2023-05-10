@@ -43,7 +43,7 @@ function GameObject(obj)
 			context.fillStyle = this.color;
 			context.beginPath();
 			context.translate(this.x, this.y);
-			context.arc(0, 0, this.radius(), 0, 360 *Math.PI/180, true);
+			context.arc(0, 0, this.width/2, 0, 360 *Math.PI/180, true);
 			context.closePath();
 			context.fill();
 		context.restore();
