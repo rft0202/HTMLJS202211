@@ -9,7 +9,9 @@ var player;
 
 var gameOver = false;
 
-var img=document.getElementById("heart");
+var imgHeart=document.getElementById("heart");
+var imgCookie=document.getElementById("cookie");
+var imgCracker=document.getElementById("cracker");
 
 	//Set Up the Canvas
 	canvas = document.getElementById("canvas");
@@ -61,10 +63,12 @@ var img=document.getElementById("heart");
 	var cookie = new GameObject(enemy1);
 	cookie.width = enemy1.width/2;
 	cookie.height = enemy1.height/2;
+	cookie.y = -10000;
 
 	var cracker = new GameObject(enemy2);
 	cracker.width = enemy2.width/2;
 	cracker.height = enemy2.height/2;
+	cracker.y = -10000;
 
 	//Global Physics Variables
 	var fX = .90;
@@ -229,7 +233,19 @@ function animate()
 			}
 		}
 
-		//Player 1 Wall Collision
+		//Player Cookie Collision
+		if(player.hitTestObject(cookie)) 
+		{
+			touchCookie();
+		}
+
+		//Player Cracker Collision
+		if(player.hitTestObject(cracker)) 
+		{
+			touchCracker();
+		}
+
+		//Player Wall Collision
 		if(player.x < player.width/2)
 		{
 			player.x = player.width/2;
@@ -292,8 +308,10 @@ function animate()
 		player.drawRect();
 		enemy1.drawCircle();
 		enemy2.drawRect();
-		cookie.drawCircle();
-		cracker.drawRect();
+		//cookie.drawCircle();
+		context.drawImage(imgCookie, cookie.x, cookie.y, cookie.width, cookie.height);
+		//cracker.drawRect();
+		context.drawImage(imgCracker, cracker.x, cracker.y, cracker.width, cracker.height);
 
 		//Player Health
 		var hearts = [];
@@ -303,14 +321,14 @@ function animate()
 			{
 				hearts[i] = new Heart();
 				//hearts[i].drawRect();
-				context.drawImage(img, hearts[i].x, hearts[i].y, hearts[i].width, hearts[i].height);
+				context.drawImage(imgHeart, hearts[i].x, hearts[i].y, hearts[i].width, hearts[i].height);
 			}
 			else
 			{
 				hearts[i] = new Heart();
 				hearts[i].x = hearts[i-1].x + hearts[i].width + 10;
 				//hearts[i].drawRect();
-				context.drawImage(img, hearts[i].x, hearts[i].y, hearts[i].width, hearts[i].height);
+				context.drawImage(imgHeart, hearts[i].x, hearts[i].y, hearts[i].width, hearts[i].height);
 			}
 		}
 	}
@@ -352,7 +370,7 @@ function loseEnemy1Health()
 			enemy1.y = -10000;
 			console.log("Enemy 1 Died");
 			cookie.x = enemy1.x;
-			cookie.y = (canvas.height - platforms[0].height) - cookie.width/2;
+			cookie.y = (canvas.height - platforms[0].height) - player.height*2;
 		}
 	}
 
@@ -372,6 +390,8 @@ function loseEnemy2Health()
 			enemy2.vy = -1;
 			enemy2.y = -10000;
 			console.log("Enemy 2 Died");
+			cracker.x = enemy2.x;
+			cracker.y = (canvas.height - platforms[0].height) - player.height*2;
 		}
 	}
 
@@ -384,6 +404,24 @@ function makeNotInvincible()
 function makeNotInvincibleEnemy()
 {
 	invincibleEnemy = false;
+}
+
+function touchCookie()
+{
+	cookie.y = -1000;
+	if (player.health < 10)
+	{
+		player.health++;
+	}
+}
+
+function touchCracker()
+{
+	cracker.y = -1000;
+	if (player.health < 10)
+	{
+		player.health++;
+	}
 }
 
 function gameOverScreen()
