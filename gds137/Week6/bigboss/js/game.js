@@ -61,7 +61,6 @@ function animate()
 	//Move Player
 	if(a)
 	{
-		//fix this later
 		player.vx += -player.ax * player.force;
 	}
 	if(d)
@@ -121,6 +120,7 @@ function animate()
 		//Player Hazard Collision
 		if(player.hitTestObject(hazards[i]))
 		{
+			hazards[i].y = -hazards[i].height;
 			hitHazard();
 		} 
 
