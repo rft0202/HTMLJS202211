@@ -87,7 +87,8 @@ function Level()
 		}
 	
 		//The index number of the grid array. Platforms are stored in here
-		var g = 0;
+		var g = 0; //keeps track of the indexes of each tile
+
 		//Used to place each tile.
 		var x = tileWidth/2;
 		var y = tileHeight/2;

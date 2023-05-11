@@ -11,7 +11,13 @@ var player = new GameObject({width:50, height:50, angle:0, x:canvas.width/2, y:c
 //This is used to move the level elements
 var level = new Level();
 //This generates a tile based level.
-	level.generate(level.l1, 150,150);		
+	level.generate(level.l1, 150,150); //how big you want the tiles to be, how you want the level to look like		
+	//level.generate(level.l1); //without the numbers, the entire level fits in one screen
+
+	//added
+	//var box = new GameObject({color: "red"});
+	//box.world = level; //moves with world
+	//box.world = player; //moves with player
 
 var fx = .85;
 var fy = .85;
@@ -58,21 +64,21 @@ states["play"] = function()
 		{
 			player.vy = 0;
 			player.y++;
-			offset.y++;
+			offset.y++; //new
 		}
 		//Hit right
 		while(level.grid[i].hitTestPoint(player.right()) && player.vx >= 0)
 		{
 			player.vx = 0;
 			player.x--;
-			offset.x--;
+			offset.x--; //new
 		}
 		//Hit left
 		while(level.grid[i].hitTestPoint(player.left()) && player.vx <= 0)
 		{
 			player.vx = 0;
 			player.x++;
-			offset.x++;
+			offset.x++; //new
 		}
 		//Hit bottom
 		while(level.grid[i].hitTestPoint(player.bottom()) && player.vy >= 0)
@@ -80,20 +86,49 @@ states["play"] = function()
 			player.canJump = true;
 			player.vy = 0;
 			player.y--;
-			offset.y--;
+			offset.y--; //new
 		}
 		
 	}
 	
 	//Moves the level and the player back the total number of pixels traveled over one animation loop.
+
+	//added
+	/*
+	if(player.x < 200 || player.x > canvas.width - 200) //level only moves when the player moves to a certain point
+	{
+		player.x -= offset.x;
+		player.y -= offset.y;
+		level.x -= offset.x;
+		level.y -= offset.y;
+	}
+	*/
+
+	//added
+	/*
+	//Smoother camera
+	var dx = canvas.width/2 - player.x; //the distance between the center of the canvas and the player
+	var dy = canvas.height/2 - player.y;
+	var camVX = dx * .15; //magnet
+	var camVY = dy * .15;
+
+	player.x += camVX;
+	player.y += camVY;
+	level.x += camVX;
+	level.y += camVY;
+	//
+	*/
+
 	player.x -= offset.x;
 	player.y -= offset.y;
 	level.x -= offset.x;
 	level.y -= offset.y;
-	
+	//^without, the player moves instead of the level
+
 	//Draws the player
 	player.drawRect();
 	player.drawDebug();
+	//box.drawRect();
 }
 
 //--------------------------------------------Animation Loop-------------------------------------------
