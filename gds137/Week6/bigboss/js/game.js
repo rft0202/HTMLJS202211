@@ -77,16 +77,11 @@ function animate()
 		items[i].x += items[i].vx;
 		items[i].y += items[i].vy;
 		
-		if(items[i].y > canvas.height)
+		if(items[i].y > canvas.height || gameOver == true)
 		{
 			items[i].y = -items[i].height;
 			items[i].x = Math.random() * canvas.width;
 			items[i].vy = Math.random() * 10 + 5;
-		}
-
-		if(gameOver == true)
-		{
-			items[i].y = -items[i].height;
 		}
 
 		//Player Item Collision
@@ -105,16 +100,11 @@ function animate()
 		hazards[i].x += hazards[i].vx;
 		hazards[i].y += hazards[i].vy;
 		
-		if(hazards[i].y > canvas.height)
+		if(hazards[i].y > canvas.height || gameOver == true)
 		{
 			hazards[i].y = -hazards[i].height;
 			hazards[i].x = Math.random() * canvas.width;
 			hazards[i].vy = Math.random() * 10 + 5;
-		}
-
-		if(gameOver == true)
-		{
-			items[i].y = -items[i].height;
 		}
 
 		//Player Hazard Collision
@@ -167,5 +157,5 @@ function hitHazard()
 function defaultColor()
 {
 	player.color =  "#ffff00";
-	gameOver == false;
+	gameOver = false;
 }
