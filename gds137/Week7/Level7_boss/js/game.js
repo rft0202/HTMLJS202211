@@ -19,12 +19,25 @@ var imgCracker=document.getElementById("cracker");
 
 	//Instantiate Platform
 	var platforms = [];
+	var numOfPlatforms = 2;
 
-	platforms[0] = new GameObject();
+	for(var p = 0; p < numOfPlatforms; p++)
+	{
+		platforms[p] = new GameObject();
+	}
+
+	//Platform 0
 	platforms[0].width = canvas.width*2;
 	platforms[0].x = canvas.width/2;
 	platforms[0].y = canvas.height - platforms[0].height/2;
 	platforms[0].color = "mediumseagreen";
+
+	//Platform 1
+	platforms[1].width = canvas.width/2;
+	platforms[1].height = 50;
+	platforms[1].x = canvas.width - platforms[1].width/2;
+	platforms[1].y = canvas.height/2 + platforms[1].height*3;
+	platforms[1].color = "mediumseagreen";
 	
 	//Instantiate Player 1
 	player = new GameObject();
@@ -36,7 +49,7 @@ var imgCracker=document.getElementById("cracker");
 
 	//Instantiate Enemy Type B
 	var enemyB = [];
-	var numOfEnemyB = 1; //number of brave enemies
+	var numOfEnemyB = 2; //number of brave enemies
 	var cookie = [];
 
 	for(var i = 0; i < numOfEnemyB; i++)
@@ -50,26 +63,29 @@ var imgCracker=document.getElementById("cracker");
 		cookie[i].height = enemyB[i].height/2;
 		cookie[i].y = -10000;
 	}
+	//EnemyB 1
+	enemyB[1].y = platforms[1].y - enemyB[1].height/2;
 
 	//Instantiate Enemy Type C
 	var enemyC = [];
-	var numOfEnemyC = 1; //number of cowardly enemies
+	var numOfEnemyC = 2; //number of cowardly enemies
+	var cracker = []
 
 	for(var i = 0; i < numOfEnemyC; i++)
 	{
 		enemyC[i] = new CowardlyEnemy();
 		enemyC[i].x = canvas.width/2;
 		enemyC[i].y = canvas.height - platforms[0].height;
+
+		cracker[i] = new GameObject(enemyC[i]);
+		cracker[i].width = enemyC[i].width/2;
+		cracker[i].height = enemyC[i].height/2;
+		cracker[i].y = -10000;
 	}
 
-	var enemy2 = enemyC[0];
-
-	
-
-	var cracker = new GameObject(enemy2);
-	cracker.width = enemy2.width/2;
-	cracker.height = enemy2.height/2;
-	cracker.y = -10000;
+	//EnemyC 1
+	enemyC[1].x = canvas.width/2 + enemyC[1].width;
+	enemyC[1].y = platforms[1].y - enemyC[1].height/2;
 
 	//Global Physics Variables
 	var fX = .90;
@@ -117,14 +133,7 @@ function animate()
 		
 		player.x += Math.round(player.vx);
 		player.y += Math.round(player.vy);
-
-		//Hit the platforms
-		while(platforms[0].hitTestPoint(player.bottom()) && player.vy >=0)
-		{
-			player.y--;
-			player.vy = 0;
-			player.canJump = true;
-		} 
+		
 
 		//EnemyB Physics
 		for(var i = 0; i < numOfEnemyB; i++)
@@ -134,36 +143,44 @@ function animate()
 
 			enemyB[i].vy += gravity;
 
-			enemyB[i].attack(player);
+			if (enemyB[i].health > 0)
+			{
+				enemyB[i].x += Math.round(enemyB[i].vx);
+				enemyB[i].y += Math.round(enemyB[i].vy);
+
+				enemyB[i].attack(player);
+			}
 		}
 		
-
-		//Enemy2 Physics
-		enemy2.vx *= fX;
-		enemy2.vy *= fY;
-		
-		enemy2.vy += gravity;
-
-		//Hit the platforms[i]
-		while(platforms[0].hitTestPoint(enemy2.bottom()) && enemy2.vy >=0)
+		//EnemyC Physics
+		for(var i = 0; i < numOfEnemyC; i++)
 		{
-			enemy2.y--;
-			enemy2.vy = 0;
-		} 
-
-
+			enemyC[i].vx *= fX;
+			enemyC[i].vy *= fY;
 		
-		enemy2.flee(player);
+			enemyC[i].vy += gravity;
+
+			if (enemyC[i].health > 0)
+			{
+				enemyC[i].x += Math.round(enemyC[i].vx);
+				enemyC[i].y += Math.round(enemyC[i].vy);
+
+				enemyC[i].flee(player);
+			}
+		}
 
 		//Enemy B Collision
 		for(var i = 0; i < numOfEnemyB; i++)
 		{
-			//Hit the platform
-			while(platforms[0].hitTestPoint(enemyB[i].bottom()) && enemyB[i].vy >=0)
+			//Hit platforms
+			for(var p = 0; p < numOfPlatforms; p++)
 			{
-				enemyB[i].y--;
-				enemyB[i].vy = 0;
-			} 
+				while(platforms[p].hitTestPoint(enemyB[i].bottom()) && enemyB[i].vy >=0)
+				{
+					enemyB[i].y--;
+					enemyB[i].vy = 0;
+				} 
+			}
 
 			//Player Collision with top of EnemyB
 			while(player.hitTestPoint(enemyB[i].top())) 
@@ -174,18 +191,6 @@ function animate()
 				{
 					loseEnemyBHealth(i);
 					console.log("EnemyB Health: " + enemyB[i].health);
-				}
-			}
-
-			//Player Collision with top of Enemy2
-			while(player.hitTestPoint(enemy2.top()) || player.hitTestPoint(enemy2.topLeft()) || player.hitTestPoint(enemy2.topRight()))
-			{
-				player.y--;
-				player.canJump = true;
-				if(!invincibleEnemy)
-				{
-					loseEnemy2Health();
-					console.log("Enemy2 Health: " + enemy2.health);
 				}
 			}
 			
@@ -201,7 +206,7 @@ function animate()
 					console.log("Player Health: " + player.health);
 				}
 			}
-			//Player Collision with enemyB[i] Right
+			//Player Collision with enemyB Right
 			while(player.hitTestPoint(enemyB[i].right()))
 			{
 				//enemyB[i].x -= player.width - enemyB[i].width/2;
@@ -214,7 +219,7 @@ function animate()
 				}
 			}
 
-			//Enemy 1 Wall Collision
+			//Enemy B Wall Collision
 			if(enemyB[i].x < enemyB[i].width/2)
 			{
 				enemyB[i].x = enemyB[i].width/2;
@@ -238,37 +243,116 @@ function animate()
 			{
 				touchCookie(i);
 			}
-		}
-
-		
-
-		//Player Collision with Enemy2 Left
-		while(player.hitTestPoint(enemy2.left()))
-		{
-			player.x--;
-			enemy2.vx = 0;
-			if(!invincible)
+			/*
+			//Cookie Platform Collision
+			for(var p = 1; p < numOfPlatforms; p++)
 			{
-				losePlayerHealth();
-				console.log("Player Health: " + player.health);
+				//Top
+				while(cookie[i].hitTestPoint(platforms[p].top()))
+				{
+					cookie[i].y--;
+				}
+				//Bottom
+				while(cookie[i].hitTestPoint(platforms[p].bottom()))
+				{
+					cookie[i].y++;
+				}
 			}
-		}
-		//Player Collision with Enemy2 Right
-		while(player.hitTestPoint(enemy2.right()))
-		{
-			player.x++;
-			enemy2.vx = 0;
-			if(!invincible)
-			{
-				losePlayerHealth();
-				console.log("Player Health: " + player.health);
-			}
+			*/
 		}
 
-		//Player Cracker Collision
-		if(player.hitTestObject(cracker)) 
+		//EnemyC Collision
+		for(var i = 0; i < numOfEnemyC; i++)
 		{
-			touchCracker();
+			//Hit platforms
+			for(var p = 0; p < numOfPlatforms; p++)
+			{
+				while(platforms[p].hitTestPoint(enemyC[i].bottom()) && enemyC[i].vy >=0)
+				{
+					enemyC[i].y--;
+					enemyC[i].vy = 0;
+				} 
+			}
+
+			//Player Collision with top of EnemyC
+			while(player.hitTestPoint(enemyC[i].top()) || player.hitTestPoint(enemyC[i].topLeft()) || player.hitTestPoint(enemyC[i].topRight()))
+			{
+				player.y--;
+				player.canJump = true;
+				if(!invincibleEnemy)
+				{
+					loseEnemyCHealth(i);
+					console.log("EnemyC Health: " + enemyC[i].health);
+				}
+			}
+
+			//Player Collision with EnemyC Left
+			while(player.hitTestPoint(enemyC[i].left()))
+			{
+				player.x--;
+				enemyC[i].vx = 0;
+				if(!invincible)
+				{
+					losePlayerHealth();
+					console.log("Player Health: " + player.health);
+				}
+			}
+			//Player Collision with enemyC Right
+			while(player.hitTestPoint(enemyC[i].right()))
+			{
+				player.x++;
+				enemyC[i].vx = 0;
+				if(!invincible)
+				{
+					losePlayerHealth();
+					console.log("Player Health: " + player.health);
+				}
+			}
+
+			//Enemy C Wall Collision
+			if(enemyC[i].x < enemyC[i].width/2)
+			{
+				enemyC[i].x = enemyC[i].width/2;
+			}
+			if(enemyC[i].x > canvas.width - enemyC[i].width/2)
+			{
+				enemyC[i].x = canvas.width - enemyC[i].width/2;
+			}
+
+			if(enemyC[i].y < enemyC[i].height/2 && enemyC[i].health > 0)
+			{
+				enemyC[i].y = enemyC[i].height/2;
+			}
+			if(enemyC[i].y > canvas.height - enemyC[i].height/2)
+			{
+				enemyC[i].y = canvas.height - enemyC[i].height/2;
+			}
+
+			//Player Cracker Collision
+			if(player.hitTestObject(cracker[i])) 
+			{
+				touchCracker(i);
+			}
+
+		}
+
+		//Player hit platform 0
+		while(platforms[0].hitTestPoint(player.bottom()) && player.vy >=0)
+			{
+				player.y--;
+				player.vy = 0;
+				player.canJump = true;
+			} 
+
+		//Player hit all platforms
+		for(var p = 1; p < numOfPlatforms; p++)
+		{
+			while(platforms[p].hitTestPoint(player.bottom()) && player.vy >=0 && !s)
+			{
+				player.y--;
+				player.vy = 0;
+				player.canJump = true;
+			} 
 		}
 
 		//Player Wall Collision
@@ -290,29 +374,13 @@ function animate()
 			player.y = canvas.height - player.height/2;
 		}
 
-
-		//Enemy 2 Wall Collision
-		if(enemy2.x < enemy2.width/2)
-		{
-			enemy2.x = enemy2.width/2;
-		}
-		if(enemy2.x > canvas.width - enemy2.width/2)
-		{
-			enemy2.x = canvas.width - enemy2.width/2;
-		}
-
-		if(enemy2.y < enemy2.height/2 && enemy2.health > 0)
-		{
-			enemy2.y = enemy2.height/2;
-		}
-		if(enemy2.y > canvas.height - enemy2.height/2)
-		{
-			enemy2.y = canvas.height - enemy2.height/2;
-		}
-
-
 		//Update the Screen
-		platforms[0].drawRect();
+		
+		for(var p = 0; p < numOfPlatforms; p++)
+		{
+			platforms[p].drawRect();
+		}
+
 		player.drawRect();
 
 		for(var i = 0; i < numOfEnemyB; i++)
@@ -321,11 +389,11 @@ function animate()
 			context.drawImage(imgCookie, cookie[i].x, cookie[i].y, cookie[i].width, cookie[i].height);
 		}
 
-		
-		enemy2.drawRect();
-		
-		//cracker.drawRect();
-		context.drawImage(imgCracker, cracker.x, cracker.y, cracker.width, cracker.height);
+		for(var i = 0; i < numOfEnemyC; i++)
+		{
+			enemyC[i].drawRect();
+			context.drawImage(imgCracker, cracker[i].x, cracker[i].y, cracker[i].width, cracker[i].height);
+		}
 
 		//Player Health
 		var hearts = [];
@@ -369,7 +437,7 @@ function losePlayerHealth()
 
 function loseEnemyBHealth(i)
 	{
-		if (enemyB[i].health > 1)
+		if (enemyB[i].health > 1 && player.health < 5)
 		{
 			enemyB[i].health -= 1; 
 			enemyB[i].color = 'red';
@@ -380,41 +448,50 @@ function loseEnemyBHealth(i)
 		else if (player.health >= 5)
 		{
 			enemyB[i].health -= 2; 
-			enemyB[i].vy = -1;
+			enemyB[i].vy = 0;
 			enemyB[i].y = -10000;
 			console.log("Enemy 1 Died");
 			cookie[i].x = enemyB[i].x;
-			cookie[i].y = (canvas.height - platforms[0].height) - player.height*2;
+			cookie[i].y = player.y - player.height;
 		}
 		else
 		{
 			enemyB[i].health -= 1; 
-			enemyB[i].vy = -1;
+			enemyB[i].vy = 0;
 			enemyB[i].y = -10000;
 			console.log("Enemy 1 Died");
 			cookie[i].x = enemyB[i].x;
-			cookie[i].y = (canvas.height - platforms[0].height) - player.height*2;
+			cookie[i].y = player.y - player.height;
 		}
 	}
 
-function loseEnemy2Health()
+function loseEnemyCHealth(i)
 	{
-		if (enemy2.health > 1)
+		if (enemyC[i].health > 1 && player.health < 5)
 		{
-			enemy2.health -= 1; 
-			enemy2.color = 'red';
+			enemyC[i].health -= 1; 
+			enemyC[i].color = 'red';
 			invincibleEnemy = true;
 			clearTimeout(wait2);
 			wait2 = setTimeout(makeNotInvincibleEnemy, 500);
 		}
+		else if (player.health >= 5)
+		{
+			enemyC[i].health -= 2; 
+			enemyC[i].vy = 0;
+			enemyC[i].y = -10000;
+			console.log("Enemy 1 Died");
+			cracker[i].x = enemyC[i].x;
+			cracker[i].y = player.y - player.height;
+		}
 		else
 		{
-			enemy2.health -= 1; 
-			enemy2.vy = -1;
-			enemy2.y = -10000;
+			enemyC[i].health -= 1; 
+			enemyC[i].vy = -1;
+			enemyC[i].y = -10000;
 			console.log("Enemy 2 Died");
-			cracker.x = enemy2.x;
-			cracker.y = (canvas.height - platforms[0].height) - player.height*2;
+			cracker[i].x = enemyC[i].x;
+			cracker[i].y = player.y - player.height;;
 		}
 	}
 
@@ -438,9 +515,9 @@ function touchCookie(i)
 	}
 }
 
-function touchCracker()
+function touchCracker(i)
 {
-	cracker.y = -1000;
+	cracker[i].y = -1000;
 	if (player.health < 10)
 	{
 		player.health++;

@@ -5,7 +5,7 @@ function BraveEnemy(obj)
 		this.width = 50;
 		this.height = 50;
 		this.color = "#b06129";
-		this.force = 0.5;
+		this.force = 0.30;
 		this.ax = 1;
 		this.ay = 1;
 		this.vx = 0;
