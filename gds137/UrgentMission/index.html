@@ -30,7 +30,7 @@
 		h = stage.canvas.height;
 
 		manifest = [
-			{src: "marinaspritesheet.png", id: "grant"},
+			{src: "spritesheet_grant.png", id: "grant"},
 			{src: "sky.png", id: "sky"},
 			{src: "ground.png", id: "ground"},
 			{src: "hill1.png", id: "hill"},
@@ -68,7 +68,7 @@
 		var spriteSheet = new createjs.SpriteSheet({
 				framerate: 30,
 				"images": [loader.getResult("grant")],
-				"frames": {"regX": 82, "height": 292, "count": 64, "regY": 0, "width": 165},
+				"frames": {"regX": 0, "height": 292, "count": 64, "regY": 0, "width": 165},
 				// define two animations, run (loops, 1.5x speed) and jump (returns to run):
 				"animations": {
 					"run": [0, 25, "run", 1.5],
@@ -91,7 +91,8 @@
 
 	function tick(event) {
 		var deltaS = event.delta / 1000;
-		var position = grant.x + 150 * deltaS;
+		//var position = grant.x + 150 * deltaS;
+		var position = grant.x
 
 		var grantW = grant.getBounds().width * grant.scaleX;
 		grant.x = (position >= w + grantW) ? -grantW : position;
