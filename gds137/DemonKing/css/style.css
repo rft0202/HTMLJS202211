@@ -1,0 +1,15 @@
+html,body{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+body{
+	background-color: thistle;
+}
+canvas{
+	border:1px solid black;
+	background-color: #bde6f2;
+}
+#heart{display:none;}
+#cookie{display:none;}
+#cracker{display:none;}
