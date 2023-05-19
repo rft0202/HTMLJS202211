@@ -10,7 +10,7 @@ var player;
 var currentState = "Menu";
 var states = [];
 
-var gameOver = false;
+//var gameOver = false;
 
 var imgHeart=document.getElementById("heart");
 var imgCookie=document.getElementById("cookie");
@@ -113,6 +113,9 @@ var imgCracker=document.getElementById("cracker");
 	menuBG.height = canvas.height;
 	menuBG.color = "#bfd2f5";
 
+	var play;
+	var instructions;
+
 //States
 states["Menu"] = function()
 {
@@ -135,11 +138,11 @@ states["Menu"] = function()
 	context.save();
 	context.fillStyle = "mediumvioletred";
 
-	var play = new GameObject({x: canvas.width/2, y: canvas.height/2 + 100, width: 120, height: 50});
+	play = new GameObject({x: canvas.width/2, y: canvas.height/2 + 100, width: 120, height: 50});
 	context.fillText("Play", play.x, play.y);
 	//play.drawRect();
 
-	var instructions = new GameObject({x: canvas.width/2, y: canvas.height/2 + 200, width: 333, height: 38});
+	instructions = new GameObject({x: canvas.width/2, y: canvas.height/2 + 200, width: 333, height: 38});
 	context.fillText("Instructions", instructions.x, instructions.y);
 	//instructions.drawRect();
 	context.restore();
@@ -154,12 +157,18 @@ states["Menu"] = function()
 		{
 			currentState = "Instructions";
 		}
+		if(currentState == "GameOver")
+		{
+			location.reload();
+		}
 	});
 }
 
 states["Instructions"] = function()
 {
 	//currentState = "Instructions";
+	play.y =  10000;
+	instructions.y = 10000;
 
 	menuBG.drawRect();
 
@@ -185,9 +194,11 @@ states["Instructions"] = function()
 
 states["Game"] = function()
 {
+	play.y =  10000;
+	instructions.y = 10000;
 	//currentState = "Game";
-	if (!gameOver)
-	{
+	//if (!gameOver)
+	//{
 		//Erase the Screen
 		context.clearRect(0,0,canvas.width, canvas.height);	
 
@@ -457,6 +468,11 @@ states["Game"] = function()
 			player.y = canvas.height - player.height/2;
 		}
 
+		if(player.health <= 0)
+		{
+			currentState = "GameOver";
+		}
+
 		//Update the Screen
 		
 		for(var p = 0; p < numOfPlatforms; p++)
@@ -496,7 +512,16 @@ states["Game"] = function()
 				context.drawImage(imgHeart, hearts[i].x, hearts[i].y, hearts[i].width, hearts[i].height);
 			}
 		}
-	}
+	//}
+}
+
+states["GameOver"] = function()
+{
+	//gameOver = true;
+	context.clearRect(0,0,canvas.width, canvas.height);	
+	context.font = "bold 48px Verdana";
+	context.textAlign = "center";
+	context.fillText("Game Over", canvas.width/2, canvas.height/2)
 }
 
 function track(e)
@@ -528,7 +553,7 @@ function losePlayerHealth()
 			player.health -= 1; 
 			//game over
 			//console.log("Game Over");
-			gameOverScreen();
+			currentState = "GameOver";
 		}
 	}
 
@@ -619,13 +644,4 @@ function touchCracker(i)
 	{
 		player.health++;
 	}
-}
-
-function gameOverScreen()
-{
-	gameOver = true;
-	context.clearRect(0,0,canvas.width, canvas.height);	
-	context.font = "bold 48px Arial";
-	context.textAlign = "center";
-	context.fillText("Game Over", canvas.width/2, canvas.height/2)
 }
